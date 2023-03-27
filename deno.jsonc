@@ -1,6 +1,7 @@
 {
   "tasks": {
-    "dev": "deno run --check --watch --lock --lock-write --cached-only --allow-net=0.0.0.0,api.stackexchange.com src/httpServer.ts"
+    "dev": "deno run --check --watch --lock --lock-write --allow-net=0.0.0.0,api.stackexchange.com src/httpServer.ts"
+    //prod: ... --cached-only
   },
   "lint": {
     "files": {
