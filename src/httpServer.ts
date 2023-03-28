@@ -3,13 +3,19 @@ import { require, handleError } from "./utils.ts";
 import * as seAPIs from "./seAPIs.ts";
 import * as designs from "./designs.ts";
 
-export function parseReqParams(reqUrl: URL): any {
-  const userId = reqUrl.searchParams.get("userId");
-  require(userId, "`userId` parameter is mandatory");
+interface ReqParams {
+  userId: number,
+  site: string
+}
+
+export function parseReqParams(reqUrl: URL): ReqParams {
+  const searchParams = reqUrl.searchParams;
+  const userId = Number(reqUrl.searchParams.get("userId"));
+  require(userId, `'userId' parameter is mandatory and must be a number; given params: ${searchParams}`);
 
   return {
-    userId: userId,
-    site: reqUrl.searchParams.get("site") || "stackoverflow",
+    userId: Number(userId),
+    site: searchParams.get("site") || "stackoverflow",
   };
 }
 
