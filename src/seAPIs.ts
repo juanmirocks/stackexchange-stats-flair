@@ -1,3 +1,5 @@
+import { require } from "./httpServerUtils.ts";
+
 /**
  * Fetch SE user's information; https://api.stackexchange.com/docs/users-by-ids
  * @param params
@@ -11,7 +13,12 @@ export function fetchData(params: any): Promise<any> {
     headers: {
       accept: "application/json",
     },
-  }).then(resp => resp.json());
+  })
+    .then((resp) => resp.json())
+    .then((payload) => {
+      require(payload.items && payload.items.length == 1, `Did not get any valid user data: ${JSON.stringify(payload)}`);
+      return payload;
+    });
 }
 
 export function fetchDataTest(params: any): Promise<any> {
