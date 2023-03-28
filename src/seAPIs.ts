@@ -1,4 +1,4 @@
-import { require } from "./httpServerUtils.ts";
+import { require } from "./utils.ts";
 
 /**
  * Fetch SE user's information; https://api.stackexchange.com/docs/users-by-ids
