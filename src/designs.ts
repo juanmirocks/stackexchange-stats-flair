@@ -16,8 +16,6 @@ export function flair(seUserPayload: any): string {
      height="${height}"
      viewBox="0 0 ${width} ${height}">
 
-    <rect width="100%" height="100%" fill="gray" />
-
     <rect
       width="100%"
       height="100%"
