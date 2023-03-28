@@ -1,11 +1,12 @@
 import { IconReputation as soIconReputation } from "npm:@stackoverflow/stacks-icons/icons";
 import SE_ART from "./svg.ts";
+import { escapeXml } from "./utils.ts";
 
 //init basic implementation
 export function flair(seUserPayload: any): string {
   const user = seUserPayload.items[0];
 
-  const scale = 5;
+  const scale = 1;
   const width = 208 * scale;
   const height = 58 * scale;
 
@@ -25,6 +26,8 @@ export function flair(seUserPayload: any): string {
       fill="${bgColor}"
       stroke="${borderColor}"
     />
+
+    <image href="${escapeXml(user.profile_image)}" x="4" y="4" height="50" width="50" />
 
     <g transform="translate(1, 1), scale(0.75)">${SE_ART.stackoverflow.LogoGlyph}</g>
     <g transform="translate(5, 25)" fill="${"black"}">${soIconReputation}</g>
