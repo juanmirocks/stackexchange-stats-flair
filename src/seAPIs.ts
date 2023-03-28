@@ -26,11 +26,47 @@ export function fetchData(params: ReqParams): Promise<any> {
 }
 
 export function fetchDataTest(params: ReqParams): Promise<any> {
-  const userPayload = _TEST_SO_USER_PAYLOAD[params.userId] || _TEST_SO_USER_PAYLOAD[1];
+  const userPayload = _TEST_SO_USER_PAYLOAD[params.userId] ||
+    _TEST_SO_USER_PAYLOAD[1];
   return Promise.resolve(userPayload);
 }
 
 const _TEST_SO_USER_PAYLOAD: any = {
+  999999999: {
+    "items": [
+      {
+        "badge_counts": {
+          "bronze": 1500393,
+          "silver": 0,
+          "gold": 48,
+        },
+        "account_id": 1,
+        "is_employee": false,
+        "last_modified_date": 1677542701,
+        "last_access_date": 1678561454,
+        "reputation_change_year": 160,
+        "reputation_change_quarter": 160,
+        "reputation_change_month": 50,
+        "reputation_change_week": 0,
+        "reputation_change_day": 0,
+        "reputation": 1677542701,
+        "creation_date": 1217514151,
+        "user_type": "registered",
+        "user_id": 999999999,
+        "accept_rate": 100,
+        "location": "Planet Earth",
+        "website_url": "???",
+        "link": "???",
+        "profile_image":
+          "???",
+        "display_name": "Test",
+      },
+    ],
+    "has_more": false,
+    "quota_max": 10000,
+    "quota_remaining": 9955,
+  },
+
   1: {
     "items": [
       {
@@ -134,5 +170,39 @@ const _TEST_SO_USER_PAYLOAD: any = {
     ],
     "quota_max": 300,
     "quota_remaining": 290,
+  },
+
+  137257: {
+    "has_more": false,
+    "items": [
+      {
+        "accept_rate": 76,
+        "account_id": 137257,
+        "badge_counts": {
+          "bronze": 43,
+          "gold": 5,
+          "silver": 43,
+        },
+        "creation_date": 1273847357,
+        "display_name": "juanmirocks",
+        "is_employee": false,
+        "last_access_date": 1680031061,
+        "last_modified_date": 1671529919,
+        "link": "https://stackoverflow.com/users/341320/juanmirocks",
+        "location": "Munich, Germany",
+        "profile_image": "https://i.stack.imgur.com/sjI5V.jpg?s=256&g=1",
+        "reputation": 4301,
+        "reputation_change_day": 10,
+        "reputation_change_month": 60,
+        "reputation_change_quarter": 198,
+        "reputation_change_week": 20,
+        "reputation_change_year": 198,
+        "user_id": 341320,
+        "user_type": "registered",
+        "website_url": "https://juanmi.rocks",
+      },
+    ],
+    "quota_max": 300,
+    "quota_remaining": 289,
   },
 };
