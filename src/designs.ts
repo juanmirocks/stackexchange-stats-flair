@@ -11,7 +11,7 @@ export function flair(seUserPayload: any): string {
   const height = 58 * scale;
 
   const bgColor = "rgb(234,234,234)";
-  const borderColor = "rgb(233,233,233)";
+  const borderColor = "rgb(194,194,194)";
 
   return `
   <svg
