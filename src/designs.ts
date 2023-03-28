@@ -34,6 +34,10 @@ export function flair(seUserPayload: any): string {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Adjusted", "Segoe UI", "Liberation Sans", sans-serif;
         font-size: 13px;
       }
+
+      text.reputation {
+        font-weight: bold;
+      }
     </style>
 
     <rect
@@ -46,9 +50,9 @@ export function flair(seUserPayload: any): string {
     <image href="${escapeXml(user.profile_image)}" x="4" y="4" height="50" width="50" />
 
     <g transform="translate(1, 1), scale(0.75)">${SE_ART.stackoverflow.LogoGlyph}</g>
-    <text text-anchor="end" x="${width - 6}" y="20" fill="#9A9B9E">${user.display_name}</text>
-    <text text-anchor="end" x="${width - 6}" y="38" fill="rgb(22,22,22)">${formatNum(user.reputation)}</text>
-    <text text-anchor="end" x="${width - 6}" y="55" fill="rgb(121,122,127)">
+    <text text-anchor="end" x="${width - 6}" y="15" fill="rgb(0,116,204)">${user.display_name}</text>
+    <text class="reputation" text-anchor="end" x="${width - 6}" y="33" fill="rgb(22,22,22)">${formatNum(user.reputation)}</text>
+    <text text-anchor="end" x="${width - 6}" y="50" fill="rgb(121,122,127)">
       <tspan fill="gold">●</tspan><tspan>${formatNum(user.badge_counts.gold)}</tspan>
       <tspan fill="silver">●</tspan><tspan>${formatNum(user.badge_counts.silver)}</tspan>
       <tspan fill="rgb(207,143,92)">●</tspan><tspan>${formatNum(user.badge_counts.bronze)}</tspan></text>
