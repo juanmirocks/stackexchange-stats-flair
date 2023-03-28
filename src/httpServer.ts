@@ -25,7 +25,7 @@ const handler = (req: Request): Promise<Response> => {
   //Minimal routing for testing and avoiding hitting the SE APIs too many times
   const seFetchData = (reqUrl.pathname === "/test_offline") ? seAPIs.fetchDataTest : seAPIs.fetchData;
 
-  return new Promise((resolve) => resolve(parseReqParams(reqUrl)))
+  return (async () => await Promise.resolve(parseReqParams(reqUrl)))()
     .then(params => seFetchData(params).then(seUserPayload => [params, seUserPayload]))
     .then(([params, seUserPayload]) => {
       const retSvg = designs.flair(params, seUserPayload);
