@@ -1,60 +1,37 @@
 import { serve } from "https://deno.land/std@0.181.0/http/server.ts";
+import { require, handleError } from "./httpServerUtils.ts";
+import * as seAPIs from "./seAPIs.ts";
+import * as designs from "./designs.ts";
 
-export class HttpError extends Error {
-  override name = "HttpError";
-  httpStatus: number;
+export function parseReqParams(req: Request): any {
+  const reqUrl = new URL(req.url);
 
-  constructor(httpStatus: number, message: string) {
-    super(message);
-    this.httpStatus = httpStatus;
-  }
+  const userId = reqUrl.searchParams.get("userId");
+  require(userId, "`userId` parameter is mandatory");
 
-  asResponse(): Response {
-    return new Response(this.message, {
-      status: this.httpStatus
-    });
-  }
+  return {
+    userId: userId,
+    site: reqUrl.searchParams.get("site") || "stackoverflow",
+  };
 }
 
-/**
- * scala-like function to test for valid inputs.
- *
- * if !expr, an `HttpError` is thrown, which contains a valid http status response.
- */
-export function require(expr: unknown, msg = ""): void {
-  if (!expr) {
-    throw new HttpError(400, msg);
-  }
-}
+const handler = (req: Request): Promise<Response> => {
 
-const handler = async (req: Request): Promise<Response> => {
-  try {
-    const reqUrl = new URL(req.url);
+  return Promise.resolve(parseReqParams(req))
+    .then(params => seAPIs.fetchDataTest(params))
+    .then(seUserPayload => {
+      const retSvg = designs.flair(seUserPayload);
 
-    const userId = reqUrl.searchParams.get("userId");
-    require(userId, "`userId` parameter is mandatory");
-    const site = reqUrl.searchParams.get("site") || "stackoverflow";
-    const targetUrl = `https://api.stackexchange.com/2.3/users/${userId}?site=${site}`;
-    const resp = await fetch(targetUrl, {
-      headers: {
-        accept: "application/json",
-      },
-    });
-
-    return new Response(resp.body, {
-      status: resp.status,
-      headers: {
-        "content-type": "application/json",
-      },
-    });
-  }
-  catch (error) {
-    if (error instanceof HttpError) {
-      return error.asResponse();
-    } else {
-      throw error;
-    }
-  }
+      return new Response(retSvg, {
+        status: 200,
+        headers: {
+          //see: https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Getting_Started#a_word_on_web_servers_for_.svgz_files
+          "Content-Type": "image/svg+xml",
+          "Vary": "Accept-Encoding"
+        }
+      });
+    })
+    .catch(handleError)
 };
 
 serve(handler);
