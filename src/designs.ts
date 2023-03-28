@@ -42,6 +42,22 @@ export function flair(params: ReqParams, seUserPayload: any): string {
     <title>${user.display_name}'s ${params.site} stats</title>
     <desc>Total reputation: ${user.reputation}; learn more: ${user.link}</desc>
 
+    <script>
+      // <![CDATA[
+      window.addEventListener("DOMContentLoaded", () => {
+        var textDisplayName = document.getElementById("display_name");
+        var textBBox = textDisplayName.getBBox();
+        var svgSeIcon = document.getElementById("seIcon").getElementsByTagName("svg")[0];
+        console.log(textBBox.width, textBBox.x);
+
+        console.log(svgSeIcon.getAttribute("x"), textBBox.x - svgSeIcon.getAttribute("width") - 5);
+        svgSeIcon.setAttribute("x", textBBox.x * 2 - svgSeIcon.getAttribute("width") - 8);
+        svgSeIcon.setAttribute("y", textBBox.y + 6);
+        console.log(svgSeIcon.getAttribute("x"));
+      });
+      // ]]>
+    </script>
+
     <style>
       text {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Adjusted", "Segoe UI", "Liberation Sans", sans-serif;
@@ -63,9 +79,10 @@ export function flair(params: ReqParams, seUserPayload: any): string {
     <image href="${escapeXml(user.profile_image)}" x="4" y="4" height="50" width="50" />
 
     <g>
-      <text text-anchor="end" x="${width - 6}" y="18" fill="rgb(0,116,204)">${user.display_name}</text>
-      <g transform="scale(0.5),translate(255,10)">${SE_ART.stackoverflow.LogoGlyph}</g>
+      <g id="seIcon" transform="scale(0.5)">${SE_ART.stackoverflow.LogoGlyph}</g>
+      <text id="display_name" text-anchor="end" x="${width - 6}" y="18" fill="rgb(0,116,204)">${user.display_name}</text>
     </g>
+
     <text class="reputation" text-anchor="end" x="${width - 6}" y="35" fill="rgb(22,22,22)">${formatNum(user.reputation)}</text>
     <text text-anchor="end" x="${width - 6}" y="52" fill="rgb(121,122,127)">
       ${writeBadge(user.badge_counts.gold, "gold")}
