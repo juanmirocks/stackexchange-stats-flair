@@ -16,7 +16,10 @@ export function fetchData(params: any): Promise<any> {
   })
     .then((resp) => resp.json())
     .then((payload) => {
-      require(payload.items && payload.items.length == 1, `Did not get any valid user data: ${JSON.stringify(payload)}`);
+      require(
+        payload.items && payload.items.length == 1,
+        `Did not get any valid user data: ${JSON.stringify(payload)}`,
+      );
       return payload;
     });
 }
