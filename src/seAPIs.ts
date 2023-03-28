@@ -1,3 +1,4 @@
+import { ReqParams } from "./dataTypes.ts";
 import { require } from "./utils.ts";
 
 /**
@@ -5,7 +6,7 @@ import { require } from "./utils.ts";
  * @param params
  * @returns async response
  */
-export function fetchData(params: any): Promise<any> {
+export function fetchData(params: ReqParams): Promise<any> {
   const targetUrl =
     `https://api.stackexchange.com/2.3/users/${params.userId}?site=${params.site}`;
 
@@ -24,7 +25,7 @@ export function fetchData(params: any): Promise<any> {
     });
 }
 
-export function fetchDataTest(params: any): Promise<any> {
+export function fetchDataTest(params: ReqParams): Promise<any> {
   const userPayload = _TEST_SO_USER_PAYLOAD[params.userId] || _TEST_SO_USER_PAYLOAD[1];
   return Promise.resolve(userPayload);
 }

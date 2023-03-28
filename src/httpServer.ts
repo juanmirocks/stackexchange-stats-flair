@@ -1,23 +1,8 @@
 import { serve } from "https://deno.land/std@0.181.0/http/server.ts";
-import { require, handleError } from "./utils.ts";
+import { handleError } from "./utils.ts";
 import * as seAPIs from "./seAPIs.ts";
 import * as designs from "./designs.ts";
-
-interface ReqParams {
-  userId: number,
-  site: string
-}
-
-export function parseReqParams(reqUrl: URL): ReqParams {
-  const searchParams = reqUrl.searchParams;
-  const userId = Number(reqUrl.searchParams.get("userId"));
-  require(userId, `'userId' parameter is mandatory and must be a number; given params: ${searchParams}`);
-
-  return {
-    userId: Number(userId),
-    site: searchParams.get("site") || "stackoverflow",
-  };
-}
+import { parseReqParams } from "./dataTypes.ts";
 
 const handler = (req: Request): Promise<Response> => {
   const reqUrl = new URL(req.url);

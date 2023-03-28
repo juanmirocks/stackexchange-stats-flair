@@ -1,4 +1,5 @@
 // import { IconReputation as soIconReputation } from "npm:@stackoverflow/stacks-icons/icons";
+import { ReqParams } from "./dataTypes.ts";
 import SE_ART from "./svg.ts";
 import { escapeXml } from "./utils.ts";
 
@@ -21,7 +22,7 @@ function writeBadge(badgeCount: number, color: string): string {
 }
 
 //init basic implementation
-export function flair(params: any, seUserPayload: any): string {
+export function flair(params: ReqParams, seUserPayload: any): string {
   const user = seUserPayload.items[0];
 
   const scale = 1;
