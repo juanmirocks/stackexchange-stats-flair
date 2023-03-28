@@ -62,8 +62,10 @@ export function flair(params: ReqParams, seUserPayload: any): string {
 
     <image href="${escapeXml(user.profile_image)}" x="4" y="4" height="50" width="50" />
 
-    <g transform="translate(1, 1), scale(0.75)">${SE_ART.stackoverflow.LogoGlyph}</g>
-    <text text-anchor="end" x="${width - 6}" y="18" fill="rgb(0,116,204)">${user.display_name}</text>
+    <g>
+      <text text-anchor="end" x="${width - 6}" y="18" fill="rgb(0,116,204)">${user.display_name}</text>
+      <g transform="scale(0.5),translate(255,10)">${SE_ART.stackoverflow.LogoGlyph}</g>
+    </g>
     <text class="reputation" text-anchor="end" x="${width - 6}" y="35" fill="rgb(22,22,22)">${formatNum(user.reputation)}</text>
     <text text-anchor="end" x="${width - 6}" y="52" fill="rgb(121,122,127)">
       ${writeBadge(user.badge_counts.gold, "gold")}
