@@ -3,9 +3,7 @@ import { require, handleError } from "./httpServerUtils.ts";
 import * as seAPIs from "./seAPIs.ts";
 import * as designs from "./designs.ts";
 
-export function parseReqParams(req: Request): any {
-  const reqUrl = new URL(req.url);
-
+export function parseReqParams(reqUrl: URL): any {
   const userId = reqUrl.searchParams.get("userId");
   require(userId, "`userId` parameter is mandatory");
 
@@ -16,9 +14,13 @@ export function parseReqParams(req: Request): any {
 }
 
 const handler = (req: Request): Promise<Response> => {
+  const reqUrl = new URL(req.url);
 
-  return Promise.resolve(parseReqParams(req))
-    .then(params => seAPIs.fetchDataTest(params))
+  //Minimal routing for testing and avoiding hitting the SE APIs too many times
+  const seFetchData = (reqUrl.pathname === "/test_offline") ? seAPIs.fetchDataTest : seAPIs.fetchData;
+
+  return Promise.resolve(parseReqParams(reqUrl))
+    .then(params => seFetchData(params))
     .then(seUserPayload => {
       const retSvg = designs.flair(seUserPayload);
 
