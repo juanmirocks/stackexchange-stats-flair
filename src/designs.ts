@@ -52,7 +52,7 @@ export function flair(params: ReqParams, seUserPayload: any): string {
 
         console.log(svgSeIcon.getAttribute("x"), textBBox.x - svgSeIcon.getAttribute("width") - 5);
         svgSeIcon.setAttribute("x", textBBox.x * 2 - svgSeIcon.getAttribute("width") - 8);
-        svgSeIcon.setAttribute("y", textBBox.y + 6);
+        svgSeIcon.setAttribute("y", textBBox.y + 4);
         console.log(svgSeIcon.getAttribute("x"));
       });
       // ]]>
