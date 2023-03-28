@@ -14,6 +14,7 @@ export class HttpError extends Error {
   }
 }
 
+
 /**
  * scala-like function to test for valid inputs.
  *
@@ -25,10 +26,30 @@ export function require(expr: unknown, msg = "", httpStatus = 400): void {
   }
 }
 
+
 export function handleError(error: any): Response {
   if (error instanceof HttpError) {
     return error.asResponse();
   } else {
     return new Response(error, { status: 500 });
   }
+}
+
+
+export function escapeXml(x: string): string {
+  return x.replace(/[<>&'"]/g, (c) => {
+    switch (c) {
+      case "<":
+        return "&lt;";
+      case ">":
+        return "&gt;";
+      case "&":
+        return "&amp;";
+      case "'":
+        return "&apos;";
+      // case '"':
+      default:
+        return "&quot;";
+    }
+  });
 }
