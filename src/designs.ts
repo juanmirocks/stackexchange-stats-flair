@@ -21,7 +21,7 @@ function writeBadge(badgeCount: number, color: string): string {
 }
 
 //init basic implementation
-export function flair(seUserPayload: any): string {
+export function flair(params: any, seUserPayload: any): string {
   const user = seUserPayload.items[0];
 
   const scale = 1;
@@ -37,6 +37,9 @@ export function flair(seUserPayload: any): string {
      width="${width}"
      height="${height}"
      viewBox="0 0 ${width} ${height}">
+
+    <title>${user.display_name}'s ${params.site} stats</title>
+    <desc>Total reputation: ${user.reputation}; learn more: ${user.link}</desc>
 
     <style>
       text {

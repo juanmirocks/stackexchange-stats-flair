@@ -20,9 +20,9 @@ const handler = (req: Request): Promise<Response> => {
   const seFetchData = (reqUrl.pathname === "/test_offline") ? seAPIs.fetchDataTest : seAPIs.fetchData;
 
   return Promise.resolve(parseReqParams(reqUrl))
-    .then(params => seFetchData(params))
-    .then(seUserPayload => {
-      const retSvg = designs.flair(seUserPayload);
+    .then(params => seFetchData(params).then(seUserPayload => [params, seUserPayload]))
+    .then(([params, seUserPayload]) => {
+      const retSvg = designs.flair(params, seUserPayload);
 
       return new Response(retSvg, {
         status: 200,
