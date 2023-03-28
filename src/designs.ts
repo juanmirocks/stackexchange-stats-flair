@@ -3,6 +3,8 @@ import SE_ART from "./svg.ts";
 
 //init basic implementation
 export function flair(seUserPayload: any): string {
+  const user = seUserPayload.items[0];
+
   const scale = 5;
   const width = 208 * scale;
   const height = 58 * scale;
@@ -26,6 +28,6 @@ export function flair(seUserPayload: any): string {
 
     <g transform="translate(1, 1), scale(0.75)">${SE_ART.stackoverflow.LogoGlyph}</g>
     <g transform="translate(5, 25)" fill="${"black"}">${soIconReputation}</g>
-    <text x="25" y="40" fill="#9A9B9E">${seUserPayload.items[0].reputation}</text>
+    <text x="25" y="40" fill="#9A9B9E">${user.reputation}</text>
   </svg>`;
 }
