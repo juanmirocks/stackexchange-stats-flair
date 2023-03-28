@@ -3,8 +3,9 @@ import SE_ART from "./svg.ts";
 
 //init basic implementation
 export function flair(seUserPayload: any): string {
-  const width = 208;
-  const height = 58;
+  const scale = 5;
+  const width = 208 * scale;
+  const height = 58 * scale;
 
   const bgColor = "rgb(234,234,234)";
   const borderColor = "rgb(233,233,233)";
