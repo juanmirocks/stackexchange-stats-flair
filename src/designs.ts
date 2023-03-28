@@ -11,6 +11,15 @@ function formatNum(x: number): string {
   return x.toLocaleString(LOCALE);
 }
 
+function writeBadge(badgeCount: number, color: string): string {
+  if (badgeCount > 0) {
+    return `<tspan><tspan fill="${color}">●</tspan><tspan>${formatNum(badgeCount)}</tspan></tspan>`;
+  }
+  else {
+    return "";
+  }
+}
+
 //init basic implementation
 export function flair(seUserPayload: any): string {
   const user = seUserPayload.items[0];
@@ -53,8 +62,9 @@ export function flair(seUserPayload: any): string {
     <text text-anchor="end" x="${width - 6}" y="18" fill="rgb(0,116,204)">${user.display_name}</text>
     <text class="reputation" text-anchor="end" x="${width - 6}" y="35" fill="rgb(22,22,22)">${formatNum(user.reputation)}</text>
     <text text-anchor="end" x="${width - 6}" y="52" fill="rgb(121,122,127)">
-      <tspan fill="gold">●</tspan><tspan>${formatNum(user.badge_counts.gold)}</tspan>
-      <tspan fill="silver">●</tspan><tspan>${formatNum(user.badge_counts.silver)}</tspan>
-      <tspan fill="rgb(207,143,92)">●</tspan><tspan>${formatNum(user.badge_counts.bronze)}</tspan></text>
+      ${writeBadge(user.badge_counts.gold, "gold")}
+      ${writeBadge(user.badge_counts.silver, "silver")}
+      ${writeBadge(user.badge_counts.bronze, "rgb(207,143,92)")}
+    </text>
   </svg>`;
 }
