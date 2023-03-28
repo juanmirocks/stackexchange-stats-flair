@@ -19,9 +19,9 @@ export class HttpError extends Error {
  *
  * if !expr, an `HttpError` is thrown with 400 http status (Bad Request).
  */
-export function require(expr: unknown, msg = ""): void {
+export function require(expr: unknown, msg = "", httpStatus = 400): void {
   if (!expr) {
-    throw new HttpError(400, msg);
+    throw new HttpError(httpStatus, msg);
   }
 }
 
