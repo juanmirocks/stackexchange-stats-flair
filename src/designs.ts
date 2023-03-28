@@ -31,7 +31,8 @@ export function flair(seUserPayload: any): string {
 
     <style>
       text {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Adjusted", "Segoe UI", "Liberation Sans", sans-serif
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Adjusted", "Segoe UI", "Liberation Sans", sans-serif;
+        font-size: 13px;
       }
     </style>
 
