@@ -29,6 +29,12 @@ export function flair(seUserPayload: any): string {
      height="${height}"
      viewBox="0 0 ${width} ${height}">
 
+    <style>
+      text {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Adjusted", "Segoe UI", "Liberation Sans", sans-serif
+      }
+    </style>
+
     <rect
       width="100%"
       height="100%"
