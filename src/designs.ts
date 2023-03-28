@@ -6,6 +6,9 @@ export function flair(seUserPayload: any): string {
   const width = 208;
   const height = 58;
 
+  const bgColor = "rgb(234,234,234)";
+  const borderColor = "rgb(233,233,233)";
+
   return `
   <svg
      xmlns="http://www.w3.org/2000/svg"
@@ -16,10 +19,10 @@ export function flair(seUserPayload: any): string {
     <rect width="100%" height="100%" fill="gray" />
 
     <rect
-      fill="rgb(193,193,193)"
       width="100%"
       height="100%"
-      stroke="rgb(233,233,233)"
+      fill="${bgColor}"
+      stroke="${borderColor}"
     />
 
     <g transform="translate(1, 1), scale(0.75)">${SE_ART.stackoverflow.LogoGlyph}</g>
