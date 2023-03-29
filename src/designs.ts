@@ -12,7 +12,7 @@ function formatNum(x: number): string {
   return x.toLocaleString(LOCALE);
 }
 
-function writeLogoIfAny(params: ReqParams): string {
+function writeSiteLogoIfAvailable(params: ReqParams): string {
   return (SE_ART[params.site])
     ? `<g id="seIcon" transform="scale(0.5)">${SE_ART[params.site].LogoGlyph}</g>`
     : "";
@@ -86,7 +86,7 @@ export function flair(params: ReqParams, seUserPayload: any): string {
     <image href="${escapeXml(user.profile_image)}" x="4" y="4" height="50" width="50" />
 
     <g>
-      ${writeLogoIfAny(params)}
+      ${writeSiteLogoIfAvailable(params)}
       <text id="display_name" text-anchor="end" x="${width - 6}" y="18" fill="rgb(0,116,204)">${user.display_name}</text>
     </g>
 
