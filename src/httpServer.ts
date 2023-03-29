@@ -1,26 +1,19 @@
 import { serve } from "https://deno.land/std@0.181.0/http/server.ts";
-import { require, handleError } from "./httpServerUtils.ts";
+import { handleError } from "./utils.ts";
 import * as seAPIs from "./seAPIs.ts";
 import * as designs from "./designs.ts";
-
-export function parseReqParams(req: Request): any {
-  const reqUrl = new URL(req.url);
-
-  const userId = reqUrl.searchParams.get("userId");
-  require(userId, "`userId` parameter is mandatory");
-
-  return {
-    userId: userId,
-    site: reqUrl.searchParams.get("site") || "stackoverflow",
-  };
-}
+import { parseReqParams } from "./dataTypes.ts";
 
 const handler = (req: Request): Promise<Response> => {
+  const reqUrl = new URL(req.url);
 
-  return Promise.resolve(parseReqParams(req))
-    .then(params => seAPIs.fetchDataTest(params))
-    .then(seUserPayload => {
-      const retSvg = designs.flair(seUserPayload);
+  //Minimal routing for testing and avoiding hitting the SE APIs too many times
+  const seFetchData = (reqUrl.pathname === "/test_offline") ? seAPIs.fetchDataTest : seAPIs.fetchData;
+
+  return (async () => await Promise.resolve(parseReqParams(reqUrl)))()
+    .then(params => seFetchData(params).then(seUserPayload => [params, seUserPayload]))
+    .then(([params, seUserPayload]) => {
+      const retSvg = designs.flair(params, seUserPayload);
 
       return new Response(retSvg, {
         status: 200,

@@ -1,10 +1,36 @@
-import { IconReputation as soIconReputation } from "npm:@stackoverflow/stacks-icons/icons";
+// import { IconReputation as soIconReputation } from "npm:@stackoverflow/stacks-icons/icons";
+import { ReqParams } from "./dataTypes.ts";
 import SE_ART from "./svg.ts";
+import { escapeXml } from "./utils.ts";
+
+const LOCALE = "en";
+
+/**
+ * Format number writing the thousand comma separators.
+ */
+function formatNum(x: number): string {
+  return x.toLocaleString(LOCALE);
+}
+
+function writeBadge(badgeCount: number, color: string): string {
+  if (badgeCount > 0) {
+    return `<tspan><tspan fill="${color}">●</tspan><tspan>${formatNum(badgeCount)}</tspan></tspan>`;
+  }
+  else {
+    return "";
+  }
+}
 
 //init basic implementation
-export function flair(seUserPayload: any): string {
-  const width = 208;
-  const height = 58;
+export function flair(params: ReqParams, seUserPayload: any): string {
+  const user = seUserPayload.items[0];
+
+  const scale = 1;
+  const width = 208 * scale;
+  const height = 58 * scale;
+
+  const bgColor = "rgb(234,234,234)";
+  const borderColor = "rgb(194,194,194)";
 
   return `
   <svg
@@ -13,17 +39,55 @@ export function flair(seUserPayload: any): string {
      height="${height}"
      viewBox="0 0 ${width} ${height}">
 
-    <rect width="100%" height="100%" fill="gray" />
+    <title>${user.display_name}'s ${params.site} stats</title>
+    <desc>Total reputation: ${user.reputation}; learn more: ${user.link}</desc>
+
+    <script>
+      // <![CDATA[
+      window.addEventListener("DOMContentLoaded", () => {
+        var textDisplayName = document.getElementById("display_name");
+        var textBBox = textDisplayName.getBBox();
+        var svgSeIcon = document.getElementById("seIcon").getElementsByTagName("svg")[0];
+        console.log(textBBox.width, textBBox.x);
+
+        console.log(svgSeIcon.getAttribute("x"), textBBox.x - svgSeIcon.getAttribute("width") - 5);
+        svgSeIcon.setAttribute("x", textBBox.x * 2 - svgSeIcon.getAttribute("width") - 8);
+        svgSeIcon.setAttribute("y", textBBox.y + 4);
+        console.log(svgSeIcon.getAttribute("x"));
+      });
+      // ]]>
+    </script>
+
+    <style>
+      text {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Adjusted", "Segoe UI", "Liberation Sans", sans-serif;
+        font-size: 13px;
+      }
+
+      text.reputation {
+        font-weight: bold;
+      }
+    </style>
 
     <rect
-      fill="rgb(193,193,193)"
       width="100%"
       height="100%"
-      stroke="rgb(233,233,233)"
+      fill="${bgColor}"
+      stroke="${borderColor}"
     />
 
-    <g transform="translate(1, 1), scale(0.75)">${SE_ART.stackoverflow.LogoGlyph}</g>
-    <g transform="translate(5, 25)" fill="${"black"}">${soIconReputation}</g>
-    <text x="25" y="40" fill="#9A9B9E">${seUserPayload.items[0].reputation}</text>
+    <image href="${escapeXml(user.profile_image)}" x="4" y="4" height="50" width="50" />
+
+    <g>
+      <g id="seIcon" transform="scale(0.5)">${SE_ART.stackoverflow.LogoGlyph}</g>
+      <text id="display_name" text-anchor="end" x="${width - 6}" y="18" fill="rgb(0,116,204)">${user.display_name}</text>
+    </g>
+
+    <text class="reputation" text-anchor="end" x="${width - 6}" y="35" fill="rgb(22,22,22)">${formatNum(user.reputation)}</text>
+    <text text-anchor="end" x="${width - 6}" y="52" fill="rgb(121,122,127)">
+      ${writeBadge(user.badge_counts.gold, "gold")}
+      ${writeBadge(user.badge_counts.silver, "silver")}
+      ${writeBadge(user.badge_counts.bronze, "rgb(207,143,92)")}
+    </text>
   </svg>`;
 }
