@@ -4,7 +4,7 @@ import * as seAPIs from "./seAPIs.ts";
 import * as designs from "./designs.ts";
 import { parseReqParams } from "./dataTypes.ts";
 
-const handler = (req: Request): Promise<Response> => {
+async function handler(req: Request): Promise<Response> {
   const reqUrl = new URL(req.url);
 
   //Minimal routing for testing and avoiding hitting the SE APIs too many times
@@ -25,6 +25,6 @@ const handler = (req: Request): Promise<Response> => {
       });
     })
     .catch(handleError)
-};
+}
 
 serve(handler);
