@@ -12,6 +12,12 @@ function formatNum(x: number): string {
   return x.toLocaleString(LOCALE);
 }
 
+function writeLogoIfAny(params: ReqParams): string {
+  return (SE_ART[params.site])
+    ? `<g id="seIcon" transform="scale(0.5)">${SE_ART[params.site].LogoGlyph}</g>`
+    : "";
+}
+
 function writeBadge(badgeCount: number, color: string): string {
   return (badgeCount > 0)
     ? `<tspan><tspan fill="${color}">●</tspan><tspan>${formatNum(badgeCount)}</tspan></tspan>`
@@ -42,9 +48,13 @@ export function flair(params: ReqParams, seUserPayload: any): string {
     <script>
       // <![CDATA[
       window.addEventListener("DOMContentLoaded", () => {
+        var svgSeIcon = document.getElementById("seIcon").getElementsByTagName("svg")[0];
+        if (!svgSeIcon) {
+          return;
+        }
+
         var textDisplayName = document.getElementById("display_name");
         var textBBox = textDisplayName.getBBox();
-        var svgSeIcon = document.getElementById("seIcon").getElementsByTagName("svg")[0];
         console.log(textBBox.width, textBBox.x);
 
         console.log(svgSeIcon.getAttribute("x"), textBBox.x - svgSeIcon.getAttribute("width") - 5);
@@ -76,7 +86,7 @@ export function flair(params: ReqParams, seUserPayload: any): string {
     <image href="${escapeXml(user.profile_image)}" x="4" y="4" height="50" width="50" />
 
     <g>
-      <g id="seIcon" transform="scale(0.5)">${SE_ART.stackoverflow.LogoGlyph}</g>
+      ${writeLogoIfAny(params)}
       <text id="display_name" text-anchor="end" x="${width - 6}" y="18" fill="rgb(0,116,204)">${user.display_name}</text>
     </g>
 
