@@ -8,7 +8,7 @@ async function handler(req: Request): Promise<Response> {
   const reqUrl = new URL(req.url);
 
   //Minimal routing for testing and avoiding hitting the SE APIs too many times
-  const seFetchData = (reqUrl.pathname === "/test_offline")
+  const seFetchData = (reqUrl.pathname.startsWith("/test_offline"))
     ? seAPIs.fetchDataTest
     : seAPIs.fetchData;
 
