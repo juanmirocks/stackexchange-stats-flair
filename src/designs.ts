@@ -13,12 +13,9 @@ function formatNum(x: number): string {
 }
 
 function writeBadge(badgeCount: number, color: string): string {
-  if (badgeCount > 0) {
-    return `<tspan><tspan fill="${color}">●</tspan><tspan>${formatNum(badgeCount)}</tspan></tspan>`;
-  }
-  else {
-    return "";
-  }
+  return (badgeCount > 0)
+    ? `<tspan><tspan fill="${color}">●</tspan><tspan>${formatNum(badgeCount)}</tspan></tspan>`
+    : "";
 }
 
 //init basic implementation
