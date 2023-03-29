@@ -12,16 +12,5 @@
     "https://deno.land/std@0.181.0/async/retry.ts": "dd19d93033d8eaddbfcb7654c0366e9d3b0a21448bdb06eba4a7d8a8cf936a92",
     "https://deno.land/std@0.181.0/async/tee.ts": "47e42d35f622650b02234d43803d0383a89eb4387e1b83b5a40106d18ae36757",
     "https://deno.land/std@0.181.0/http/server.ts": "cbb17b594651215ba95c01a395700684e569c165a567e4e04bba327f41197433"
-  },
-  "npm": {
-    "specifiers": {
-      "@stackoverflow/stacks-icons": "@stackoverflow/stacks-icons@5.3.1"
-    },
-    "packages": {
-      "@stackoverflow/stacks-icons@5.3.1": {
-        "integrity": "sha512-WxSc+WzakzNH4cUNVQPvjIQ3NXa7G9CVbT7XovMbyKp3q+cfSpY8sL11RXDtxbAN0FUZ0pq3yHTVoRwVnlXGpQ==",
-        "dependencies": {}
-      }
-    }
   }
 }
