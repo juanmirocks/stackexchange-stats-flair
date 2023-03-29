@@ -8,7 +8,7 @@ export interface ReqParams {
 export function parseReqParams(reqUrl: URL): ReqParams {
   const searchParams = reqUrl.searchParams;
   const userId = Number(reqUrl.searchParams.get("userId"));
-  require(userId, `'userId' parameter is mandatory and must be a number; given params: ${searchParams}`);
+  require(userId, `'userId' query parameter is mandatory and must be a number; given params: ${searchParams}`);
 
   return {
     userId: Number(userId),
