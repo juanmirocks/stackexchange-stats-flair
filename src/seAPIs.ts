@@ -12,7 +12,7 @@ const _SE_MY_STACKAPP_KEY_QUERY_PARAM = (_SE_MY_STACKAPP_KEY) ? `&key=${_SE_MY_S
  */
 export function fetchData(params: ReqParams): Promise<any> {
   const targetUrl =
-    `https://api.stackexchange.com/2.3/users/${params.userId}?site=${params.site}${_SE_MY_STACKAPP_KEY_QUERY_PARAM}`;
+    `https://api.stackexchange.com/2.3/users/${params.user_id}?site=${params.site}${_SE_MY_STACKAPP_KEY_QUERY_PARAM}`;
 
   return fetch(targetUrl, {
     headers: {
@@ -30,7 +30,7 @@ export function fetchData(params: ReqParams): Promise<any> {
 }
 
 export function fetchDataTest(params: ReqParams): Promise<any> {
-  const userPayload = TEST_SO_USERS_PAYLOAD[params.userId] ||
+  const userPayload = TEST_SO_USERS_PAYLOAD[params.user_id] ||
     TEST_SO_USERS_PAYLOAD[1];
   return Promise.resolve(userPayload);
 }

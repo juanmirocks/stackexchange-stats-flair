@@ -8,4 +8,4 @@ Alternative to low-resolution [Stack Exchange flair](http://stackoverflow.com/us
 
 vs.
 
-![Example new SO flair](https://stackexchange-stats-flair.deno.dev/test_offline?userId=1)
+![Example new SO flair](https://stackexchange-stats-flair.deno.dev/test_offline?user_id=1)
