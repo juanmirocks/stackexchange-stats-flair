@@ -1,6 +1,9 @@
 import { ReqParams } from "./dataTypes.ts";
 import { require } from "./utils.ts";
 import { TEST_SO_USERS_PAYLOAD } from "./testSePayloads.ts";
+import { _SE_MY_STACKAPP_KEY } from "./secrets.ts";
+
+const _SE_MY_STACKAPP_KEY_QUERY_PARAM = (_SE_MY_STACKAPP_KEY) ? `&key=${_SE_MY_STACKAPP_KEY}` : '';
 
 /**
  * Fetch SE user's information; https://api.stackexchange.com/docs/users-by-ids
@@ -9,7 +12,7 @@ import { TEST_SO_USERS_PAYLOAD } from "./testSePayloads.ts";
  */
 export function fetchData(params: ReqParams): Promise<any> {
   const targetUrl =
-    `https://api.stackexchange.com/2.3/users/${params.userId}?site=${params.site}`;
+    `https://api.stackexchange.com/2.3/users/${params.userId}?site=${params.site}${_SE_MY_STACKAPP_KEY_QUERY_PARAM}`;
 
   return fetch(targetUrl, {
     headers: {
