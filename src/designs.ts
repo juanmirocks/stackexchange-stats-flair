@@ -2,7 +2,6 @@
 import { ReqParams } from "./dataTypes.ts";
 import { fetchImageAsBase64DataURL } from "./fetch.ts";
 import SE_ART from "./svg.ts";
-import { escapeXml } from "./utils.ts";
 
 const LOCALE = "en";
 
