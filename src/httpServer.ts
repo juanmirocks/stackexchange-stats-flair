@@ -2,10 +2,14 @@ import { serve } from "https://deno.land/std@0.181.0/http/server.ts";
 import { handleError } from "./utils.ts";
 import * as seAPIs from "./fetch.ts";
 import * as designs from "./designs.ts";
-import { parseReqParams } from "./dataTypes.ts";
+import { DummyCache, parseReqParams } from "./dataTypes.ts";
 
 
-const _CACHE = await caches.open("MAIN_v01");
+const _CACHE =
+  (caches)
+    ? await caches.open("MAIN_v01")
+    // Use dummy cache (does nothing) if the Cache API is not available
+    : new DummyCache();
 
 
 async function handler(req: Request): Promise<Response> {
