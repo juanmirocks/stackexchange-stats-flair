@@ -6,10 +6,10 @@ import { DummyCache, parseReqParams } from "./dataTypes.ts";
 
 
 const _CACHE =
-  (caches)
-    ? await caches.open("MAIN_v01")
+  (typeof caches === 'undefined')
     // Use dummy cache (does nothing) if the Cache API is not available
-    : new DummyCache();
+    ? new DummyCache()
+    : await caches.open("MAIN_v01");
 
 
 async function handler(req: Request): Promise<Response> {
