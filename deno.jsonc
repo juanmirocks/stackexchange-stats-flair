@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "dev": "deno run --reload --check --watch --lock --lock-write --allow-net=0.0.0.0,api.stackexchange.com --allow-env=_SE_MY_STACKAPP_KEY src/httpServer.ts"
+    "dev": "deno run --reload --check --watch --lock --lock-write --allow-net=0.0.0.0,api.stackexchange.com,www.gravatar.com,i.stack.imgur.com --allow-env=_SE_MY_STACKAPP_KEY src/httpServer.ts"
     //prod: ... --cached-only
   },
   "lint": {

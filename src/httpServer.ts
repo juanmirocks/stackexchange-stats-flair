@@ -8,18 +8,17 @@ async function handler(req: Request): Promise<Response> {
   const reqUrl = new URL(req.url);
 
   //Minimal routing for testing and avoiding hitting the SE APIs too many times
-  const seFetchData = (reqUrl.pathname === "/test_offline")
-    ? seAPIs.fetchDataTest
-    : seAPIs.fetchData;
+  const seFetchData = (reqUrl.pathname.startsWith("/test_offline"))
+    ? seAPIs.fetchSeUserDataTest
+    : seAPIs.fetchSeUserData;
 
   return (async () => await Promise.resolve(parseReqParams(reqUrl)))()
     .then((params) =>
       seFetchData(params).then((seUserPayload) => [params, seUserPayload])
     )
-    .then(([params, seUserPayload]) => {
-      const retSvg = designs.flair(params, seUserPayload);
-
-      return new Response(retSvg, {
+    .then(([params, seUserPayload]) => designs.flair(params, seUserPayload))
+    .then(svg => {
+      return new Response(svg, {
         status: 200,
         headers: {
           //see: https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Getting_Started#a_word_on_web_servers_for_.svgz_files
