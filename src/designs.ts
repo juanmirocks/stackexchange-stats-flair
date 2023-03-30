@@ -36,9 +36,8 @@ export function flair(params: ReqParams, seUserPayload: any): Promise<string> {
   const profileImageBase64UrlPrm = fetchImageAsBase64DataURL(user.profile_image);
 
   return profileImageBase64UrlPrm.then(profileImageBase64Url => {
-    const scale = 1;
-    const width = 208 * scale;
-    const height = 58 * scale;
+    const width = 208;
+    const height = 58;
 
     const bgColor = "rgb(234,234,234)";
     const borderColor = "rgb(194,194,194)";
