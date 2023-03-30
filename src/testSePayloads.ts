@@ -25,7 +25,7 @@ export const TEST_SO_USERS_PAYLOAD: any = {
         "website_url": "???",
         "link": "???",
         "profile_image":
-          "???",
+          "https://www.gravatar.com/avatar/?s=256&d=identicon",
         "display_name": "Test",
       },
     ],
