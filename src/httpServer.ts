@@ -9,8 +9,8 @@ async function handler(req: Request): Promise<Response> {
 
   //Minimal routing for testing and avoiding hitting the SE APIs too many times
   const seFetchData = (reqUrl.pathname.startsWith("/test_offline"))
-    ? seAPIs.fetchDataTest
-    : seAPIs.fetchData;
+    ? seAPIs.fetchSeUserDataTest
+    : seAPIs.fetchSeUserData;
 
   return (async () => await Promise.resolve(parseReqParams(reqUrl)))()
     .then((params) =>
