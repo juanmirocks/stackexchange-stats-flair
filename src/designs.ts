@@ -30,7 +30,7 @@ function writeBadge(badgeCount: number, color: string): string {
 
 
 //init basic implementation
-export function flair(params: ReqParams, seUserPayload: any): Promise<string> {
+export function drawClassicFlair(params: ReqParams, seUserPayload: any): Promise<string> {
   const user = seUserPayload.items[0];
 
   const profileImageBase64UrlPrm = fetchImageAsBase64DataURL(user.profile_image);
