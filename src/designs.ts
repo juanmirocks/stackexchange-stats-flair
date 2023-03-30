@@ -62,12 +62,9 @@ export function flair(params: ReqParams, seUserPayload: any): Promise<string> {
 
           var textDisplayName = document.getElementById("display_name");
           var textBBox = textDisplayName.getBBox();
-          console.log(textBBox.width, textBBox.x);
 
-          console.log(svgSeIcon.getAttribute("x"), textBBox.x - svgSeIcon.getAttribute("width") - 5);
           svgSeIcon.setAttribute("x", textBBox.x * 2 - svgSeIcon.getAttribute("width") - 8);
           svgSeIcon.setAttribute("y", textBBox.y + 4);
-          console.log(svgSeIcon.getAttribute("x"));
         });
         // ]]>
       </script>
