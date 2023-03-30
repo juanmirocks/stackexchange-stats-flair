@@ -16,7 +16,7 @@ async function handler(req: Request): Promise<Response> {
     .then((params) =>
       seFetchData(params).then((seUserPayload) => [params, seUserPayload])
     )
-    .then(([params, seUserPayload]) => designs.flair(params, seUserPayload))
+    .then(([params, seUserPayload]) => designs.drawClassicFlair(params, seUserPayload))
     .then(svg => {
       return new Response(svg, {
         status: 200,
