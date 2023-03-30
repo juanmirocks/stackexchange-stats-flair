@@ -7,18 +7,18 @@ import SE_ART from "./svg.ts";
 const LOCALE = "en";
 
 
+function writeSiteLogoIfAvailable(params: ReqParams): string {
+  return (SE_ART[params.site])
+    ? `<svg id="svgSeIconParent" x="60" y="38">${SE_ART[params.site].LogoGlyphXxs}</svg>`
+    : "";
+}
+
+
 /**
  * Format number writing the thousand comma separators.
  */
 function formatNum(x: number): string {
   return x.toLocaleString(LOCALE);
-}
-
-
-function writeSiteLogoIfAvailable(params: ReqParams): string {
-  return (SE_ART[params.site])
-    ? `<svg id="svgSeIconParent" x="60" y="38">${SE_ART[params.site].LogoGlyphXxs}</svg>`
-    : "";
 }
 
 
