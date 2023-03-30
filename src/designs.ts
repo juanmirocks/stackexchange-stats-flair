@@ -29,7 +29,31 @@ function writeBadge(badgeCount: number, color: string): string {
 }
 
 
-//init basic implementation
+/**
+ * Return an SVG image (as an async string) that resembles the original flair images from SE/SO: https://stackoverflow.com/users/flair/
+ *
+ * Known issues:
+ * ## The site icon is currently only available for the site Stack Overflow (SO).
+ *
+ * ## The site icon is shown as in the original (left relative to the user's display name) only when the context allows JavaScript (JS).
+ *
+ * The current solution uses JS on the client side to dynamically calculate the displayed size of the display name (which is at first unknown) and,
+ * accordingly, fix the x coordinate of the icon.
+ * In particular, that doesn't work when embedding the SVG image within a markdown document.
+ *
+ * Nonetheless, in the absence of JS, the icon is displayed to the right and bottom of the user's profile image.
+ * That's a good default as it's the same as the "Combined" flair original style SE.
+ *
+ * As of 2023-03-30, didn't manage to position the icon relative to the display name using either:
+ * * SVG only
+ * * SVG with a `<foreignObject>` and CSS flexbox
+ * * Dynamic JavaScript but on the server side:
+ *  * jsdom gave running problems and is anyway not available on Deno Deploy
+ *  * deno-dom doesn't support SVG; see https://github.com/b-fuze/deno-dom/issues/81
+ *  * LinkeDOM supports SVG only in a limited way, and in particular doesn't implement [SVGGraphicsElement.getBBox()](https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/getBBox)
+ *    see https://github.com/WebReflection/linkedom/blob/main/esm/svg/element.js
+ *
+ */
 export function drawClassicFlair(params: ReqParams, seUserPayload: any): Promise<string> {
   const user = seUserPayload.items[0];
 
