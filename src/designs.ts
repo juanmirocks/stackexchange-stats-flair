@@ -17,7 +17,7 @@ function formatNum(x: number): string {
 
 function writeSiteLogoIfAvailable(params: ReqParams): string {
   return (SE_ART[params.site])
-    ? `<g id="seIcon" transform="scale(0.5)">${SE_ART[params.site].LogoGlyph}</g>`
+    ? `<svg id="svgSeIconParent" x="60" y="38">${SE_ART[params.site].LogoGlyphXxs}</svg>`
     : "";
 }
 
@@ -55,16 +55,16 @@ export function flair(params: ReqParams, seUserPayload: any): Promise<string> {
       <script>
         // <![CDATA[
         window.addEventListener("DOMContentLoaded", () => {
-          var svgSeIcon = document.getElementById("seIcon").getElementsByTagName("svg")[0];
-          if (!svgSeIcon) {
+          var svgSeIconParent = document.getElementById("svgSeIconParent");
+          if (!svgSeIconParent) {
             return;
           }
 
           var textDisplayName = document.getElementById("display_name");
           var textBBox = textDisplayName.getBBox();
 
-          svgSeIcon.setAttribute("x", textBBox.x * 2 - svgSeIcon.getAttribute("width") - 8);
-          svgSeIcon.setAttribute("y", textBBox.y + 4);
+          svgSeIconParent.setAttribute("x", textBBox.x - svgSeIconParent.getAttribute("width") - 22);
+          svgSeIconParent.setAttribute("y", textBBox.y - 2);
         });
         // ]]>
       </script>
