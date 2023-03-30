@@ -37,3 +37,20 @@ export function fetchSeUserDataTest(params: ReqParams): Promise<any> {
     TEST_SO_USERS_PAYLOAD[1];
   return Promise.resolve(userPayload);
 }
+
+
+export async function fetchImageAsBase64DataURL(imageUrl: string): Promise<string> {
+  return fetch(imageUrl)
+    .then(response => response.blob())
+    .then(blob => convertBlobToBase64DataURL(blob))
+}
+
+
+async function convertBlobToBase64DataURL(blob: Blob): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.onerror = () => reject(fileReader.error);
+    fileReader.onloadend = () => resolve(fileReader.result as string);
+    fileReader.readAsDataURL(blob);
+  });
+}

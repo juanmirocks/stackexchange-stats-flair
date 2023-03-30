@@ -16,10 +16,9 @@ async function handler(req: Request): Promise<Response> {
     .then((params) =>
       seFetchData(params).then((seUserPayload) => [params, seUserPayload])
     )
-    .then(([params, seUserPayload]) => {
-      const retSvg = designs.flair(params, seUserPayload);
-
-      return new Response(retSvg, {
+    .then(([params, seUserPayload]) => designs.flair(params, seUserPayload))
+    .then(svg => {
+      return new Response(svg, {
         status: 200,
         headers: {
           //see: https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Getting_Started#a_word_on_web_servers_for_.svgz_files
