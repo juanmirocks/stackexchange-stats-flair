@@ -39,6 +39,7 @@ export function fetchSeUserDataTest(params: ReqParams): Promise<any> {
 }
 
 
+//MAYBE (2023-03-30) ask for a smaller image (with parameter ?s=). Having said that, that will look worse when zooming.
 export async function fetchImageAsBase64DataURL(imageUrl: string): Promise<string> {
   return fetch(imageUrl)
     .then(response => response.blob())
