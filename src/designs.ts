@@ -1,10 +1,11 @@
 // import { IconReputation as soIconReputation } from "npm:@stackoverflow/stacks-icons/icons";
 import { ReqParams } from "./dataTypes.ts";
-import { fetchImageAsBase64DataURL } from "./seAPIs.ts";
+import { fetchImageAsBase64DataURL } from "./fetch.ts";
 import SE_ART from "./svg.ts";
-import { escapeXml } from "./utils.ts";
+
 
 const LOCALE = "en";
+
 
 /**
  * Format number writing the thousand comma separators.
@@ -13,17 +14,20 @@ function formatNum(x: number): string {
   return x.toLocaleString(LOCALE);
 }
 
+
 function writeSiteLogoIfAvailable(params: ReqParams): string {
   return (SE_ART[params.site])
     ? `<g id="seIcon" transform="scale(0.5)">${SE_ART[params.site].LogoGlyph}</g>`
     : "";
 }
 
+
 function writeBadge(badgeCount: number, color: string): string {
   return (badgeCount > 0)
     ? `<tspan><tspan fill="${color}">●</tspan><tspan>${formatNum(badgeCount)}</tspan></tspan>`
     : "";
 }
+
 
 //init basic implementation
 export function flair(params: ReqParams, seUserPayload: any): Promise<string> {
@@ -32,9 +36,8 @@ export function flair(params: ReqParams, seUserPayload: any): Promise<string> {
   const profileImageBase64UrlPrm = fetchImageAsBase64DataURL(user.profile_image);
 
   return profileImageBase64UrlPrm.then(profileImageBase64Url => {
-    const scale = 1;
-    const width = 208 * scale;
-    const height = 58 * scale;
+    const width = 208;
+    const height = 58;
 
     const bgColor = "rgb(234,234,234)";
     const borderColor = "rgb(194,194,194)";
@@ -59,12 +62,9 @@ export function flair(params: ReqParams, seUserPayload: any): Promise<string> {
 
           var textDisplayName = document.getElementById("display_name");
           var textBBox = textDisplayName.getBBox();
-          console.log(textBBox.width, textBBox.x);
 
-          console.log(svgSeIcon.getAttribute("x"), textBBox.x - svgSeIcon.getAttribute("width") - 5);
           svgSeIcon.setAttribute("x", textBBox.x * 2 - svgSeIcon.getAttribute("width") - 8);
           svgSeIcon.setAttribute("y", textBBox.y + 4);
-          console.log(svgSeIcon.getAttribute("x"));
         });
         // ]]>
       </script>
