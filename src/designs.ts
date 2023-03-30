@@ -3,7 +3,9 @@ import { ReqParams } from "./dataTypes.ts";
 import { fetchImageAsBase64DataURL } from "./fetch.ts";
 import SE_ART from "./svg.ts";
 
+
 const LOCALE = "en";
+
 
 /**
  * Format number writing the thousand comma separators.
@@ -12,17 +14,20 @@ function formatNum(x: number): string {
   return x.toLocaleString(LOCALE);
 }
 
+
 function writeSiteLogoIfAvailable(params: ReqParams): string {
   return (SE_ART[params.site])
     ? `<g id="seIcon" transform="scale(0.5)">${SE_ART[params.site].LogoGlyph}</g>`
     : "";
 }
 
+
 function writeBadge(badgeCount: number, color: string): string {
   return (badgeCount > 0)
     ? `<tspan><tspan fill="${color}">●</tspan><tspan>${formatNum(badgeCount)}</tspan></tspan>`
     : "";
 }
+
 
 //init basic implementation
 export function flair(params: ReqParams, seUserPayload: any): Promise<string> {
