@@ -7,18 +7,18 @@ import SE_ART from "./svg.ts";
 const LOCALE = "en";
 
 
+function writeSiteLogoIfAvailable(params: ReqParams): string {
+  return (SE_ART[params.site])
+    ? `<svg id="svgSeIconParent" x="60" y="38">${SE_ART[params.site].LogoGlyphXxs}</svg>`
+    : "";
+}
+
+
 /**
  * Format number writing the thousand comma separators.
  */
 function formatNum(x: number): string {
   return x.toLocaleString(LOCALE);
-}
-
-
-function writeSiteLogoIfAvailable(params: ReqParams): string {
-  return (SE_ART[params.site])
-    ? `<g id="seIcon" transform="scale(0.5)">${SE_ART[params.site].LogoGlyph}</g>`
-    : "";
 }
 
 
@@ -29,8 +29,32 @@ function writeBadge(badgeCount: number, color: string): string {
 }
 
 
-//init basic implementation
-export function flair(params: ReqParams, seUserPayload: any): Promise<string> {
+/**
+ * Return an SVG image (as an async string) that resembles the original flair images from SE/SO: https://stackoverflow.com/users/flair/
+ *
+ * Known issues:
+ * ## The site icon is currently only available for the site Stack Overflow (SO).
+ *
+ * ## The site icon is shown as in the original (left relative to the user's display name) only when the context allows JavaScript (JS).
+ *
+ * The current solution uses JS on the client side to dynamically calculate the displayed size of the display name (which is at first unknown) and,
+ * accordingly, fix the x coordinate of the icon.
+ * In particular, that doesn't work when embedding the SVG image within a markdown document.
+ *
+ * Nonetheless, in the absence of JS, the icon is displayed to the right and bottom of the user's profile image.
+ * That's a good default as it's the same as the "Combined" flair original style SE.
+ *
+ * As of 2023-03-30, didn't manage to position the icon relative to the display name using either:
+ * * SVG only
+ * * SVG with a `<foreignObject>` and CSS flexbox
+ * * Dynamic JavaScript but on the server side:
+ *  * jsdom gave running problems and is anyway not available on Deno Deploy
+ *  * deno-dom doesn't support SVG; see https://github.com/b-fuze/deno-dom/issues/81
+ *  * LinkeDOM supports SVG only in a limited way, and in particular doesn't implement [SVGGraphicsElement.getBBox()](https://developer.mozilla.org/en-US/docs/Web/API/SVGGraphicsElement/getBBox)
+ *    see https://github.com/WebReflection/linkedom/blob/main/esm/svg/element.js
+ *
+ */
+export function drawClassicFlair(params: ReqParams, seUserPayload: any): Promise<string> {
   const user = seUserPayload.items[0];
 
   const profileImageBase64UrlPrm = fetchImageAsBase64DataURL(user.profile_image);
@@ -55,16 +79,16 @@ export function flair(params: ReqParams, seUserPayload: any): Promise<string> {
       <script>
         // <![CDATA[
         window.addEventListener("DOMContentLoaded", () => {
-          var svgSeIcon = document.getElementById("seIcon").getElementsByTagName("svg")[0];
-          if (!svgSeIcon) {
+          var svgSeIconParent = document.getElementById("svgSeIconParent");
+          if (!svgSeIconParent) {
             return;
           }
 
           var textDisplayName = document.getElementById("display_name");
           var textBBox = textDisplayName.getBBox();
 
-          svgSeIcon.setAttribute("x", textBBox.x * 2 - svgSeIcon.getAttribute("width") - 8);
-          svgSeIcon.setAttribute("y", textBBox.y + 4);
+          svgSeIconParent.setAttribute("x", textBBox.x - svgSeIconParent.getAttribute("width") - 22);
+          svgSeIconParent.setAttribute("y", textBBox.y - 2);
         });
         // ]]>
       </script>
