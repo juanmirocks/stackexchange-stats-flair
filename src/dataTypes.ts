@@ -28,7 +28,7 @@ export function parseReqParams(reqUrl: URL): ReqParams {
  * Dummy cache that does nothing.
  *
  * As of 2023-03-30, Deno Deploy does not support the Cache API; see https://deno.com/deploy/docs/runtime-api
- * In Deno Deploy we use this empty cache to avoid errors such as "ReferenceError: caches is not defined".
+ * In the absence of the global `caches` object, we use this empty cache to avoid errors such as "ReferenceError: caches is not defined".
  */
 export class DummyCache implements Cache {
   async put(_request: RequestInfo | URL, _response: Response): Promise<void> {
