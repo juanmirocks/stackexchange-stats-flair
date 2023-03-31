@@ -104,8 +104,7 @@ export function drawClassicFlair(params: ReqParams, seUserPayload: any): Promise
         }
 
         rect.canvas {
-          stroke: ${theme.borderColor};
-          stroke-dasharray: 0 ${width} ${height + width};
+          ${theme.setCanvasBordersStyle(width, height)}
         }
       </style>
 
@@ -114,6 +113,7 @@ export function drawClassicFlair(params: ReqParams, seUserPayload: any): Promise
         height="100%"
         fill="${theme.bgColor}"
       />
+      ${theme.drawMaybeExtraBorderLines(width, height)}
 
       <image href="${profileImageBase64Url}" x="4" y="4" height="50" width="50" />
 

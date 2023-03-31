@@ -23,15 +23,37 @@ export const THEMES: _ThemesMap = {
     displayNameColor: "#0077CC",
     reputationColor: "#444444",
     badgeCountsColor: "#808185",
+
+    setCanvasBordersStyle: function (_width: number, _height: number): string {
+      return `
+      stroke: ${this.borderColor};
+      `
+    },
+
+    drawMaybeExtraBorderLines: function (_width: number, _height: number): string {
+      return "";
+    }
   },
 
   //classic-flair-clean
   "clean": {
     bgColor: "#FFFFFF",
-    borderColor: "#FFFFFF",
+    // borderColor: "none",
     displayNameColor: "#0077CC",
     reputationColor: "#444444",
     badgeCountsColor: "#808185",
+
+    setCanvasBordersStyle: function (_width: number, _height: number): string {
+      //no need to draw any border, since the border is "none", or rather, the color is the same as the background's
+      // return `
+      // stroke: ${this.borderColor}
+      // `
+      return "";
+    },
+
+    drawMaybeExtraBorderLines: function (_width: number, _height: number): string {
+      return "";
+    }
   },
 
   //classic-flair-dark
@@ -39,9 +61,24 @@ export const THEMES: _ThemesMap = {
     bgColor: "#222222",
     //wrong; it has 2 border colors
     borderColor: "#888888",
+    rightAndBottomBorderColor: "#444444",
     displayNameColor: "#CCCCCC",
     reputationColor: "#CCCCCC",
     badgeCountsColor: "#CCCCCC",
+
+    setCanvasBordersStyle: function (width: number, height: number): string {
+      return `
+      stroke: ${this.borderColor};
+      stroke-dasharray: ${width} ${height} ${0} ${width};
+      `
+    },
+
+    drawMaybeExtraBorderLines: function (width: number, height: number): string {
+      return `
+      <line x1="${width}" y1="0" x2="${width}" y2="${height}" stroke="${this.rightAndBottomBorderColor}" />
+      <line x1="0" y1="${height}" x2="${width}" y2="${height}" stroke="${this.rightAndBottomBorderColor}" />
+      `
+    }
   },
 
   //classic-flair-hotdog
@@ -52,6 +89,17 @@ export const THEMES: _ThemesMap = {
     displayNameColor: "#FFFF00",
     reputationColor: "#FFFF00",
     badgeCountsColor: "#FFFFFF",
+
+    setCanvasBordersStyle: function (width: number, height: number): string {
+      return `
+      stroke: ${this.borderColor};
+      stroke-dasharray: 0 ${width} ${height + width} ${height};
+      `
+    },
+
+    drawMaybeExtraBorderLines: function (_width: number, _height: number): string {
+      return "";
+    }
   },
 };
 
