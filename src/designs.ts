@@ -8,7 +8,7 @@ import { DEFAULT_STYLES, THEMES } from "./themes.ts";
 const LOCALE = "en";
 
 
-function writeSiteLogoIfAvailable(params: ReqParams): string {
+function drawSiteLogoIfAvailable(params: ReqParams): string {
   return (SE_ART[params.site])
     ? `<svg id="svgSeIconParent" x="60" y="38">${SE_ART[params.site].LogoGlyphXxs}</svg>`
     : "";
@@ -23,7 +23,7 @@ function formatNum(x: number): string {
 }
 
 
-function writeBadge(badgeCount: number, color: string): string {
+function drawBadge(badgeCount: number, color: string): string {
   return (badgeCount > 0)
     ? `<tspan><tspan fill="${color}">●</tspan><tspan>${formatNum(badgeCount)}</tspan></tspan>`
     : "";
@@ -120,15 +120,15 @@ export function drawClassicFlair(params: ReqParams, seUserPayload: any): Promise
       <image href="${profileImageBase64Url}" x="4" y="4" height="50" width="50" />
 
       <g>
-        ${writeSiteLogoIfAvailable(params)}
+        ${drawSiteLogoIfAvailable(params)}
         <text id="display_name" text-anchor="end" x="${width - 6}" y="18" fill="${theme.displayNameColor}">${user.display_name}</text>
       </g>
 
       <text class="reputation" text-anchor="end" x="${width - 6}" y="35" fill="${theme.reputationColor}">${formatNum(user.reputation)}</text>
       <text text-anchor="end" x="${width - 6}" y="52" fill="${theme.badgeCountsColor}">
-        ${writeBadge(user.badge_counts.gold, DEFAULT_STYLES.goldColor)}
-        ${writeBadge(user.badge_counts.silver, DEFAULT_STYLES.silverColor)}
-        ${writeBadge(user.badge_counts.bronze, DEFAULT_STYLES.bronzeColor)}
+        ${drawBadge(user.badge_counts.gold, DEFAULT_STYLES.goldColor)}
+        ${drawBadge(user.badge_counts.silver, DEFAULT_STYLES.silverColor)}
+        ${drawBadge(user.badge_counts.bronze, DEFAULT_STYLES.bronzeColor)}
       </text>
     </svg>`;
   });
