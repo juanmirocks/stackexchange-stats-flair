@@ -1,3 +1,4 @@
+// See all options: https://deno.land/manual@v1.32.1/getting_started/configuration_file#configuration-file
 {
   "tasks": {
     "dev": "deno run --reload --check --watch --lock --lock-write --allow-net=0.0.0.0,api.stackexchange.com,www.gravatar.com,i.stack.imgur.com --allow-env=_SE_MY_STACKAPP_KEY src/httpServer.ts"
@@ -11,6 +12,9 @@
   "fmt": {
     "files": {
       "include": ["src/"]
+    },
+    "options": {
+      "lineWidth": 120
     }
   }
 }

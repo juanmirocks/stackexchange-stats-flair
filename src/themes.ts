@@ -5,101 +5,135 @@ export const DEFAULT_STYLES = {
   "bronzeColor": "#CF8F5C",
 
   "classic-flair": {
-    textFontFamily:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI Adjusted", "Segoe UI", "Liberation Sans", sans-serif',
+    textFontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI Adjusted", "Segoe UI", "Liberation Sans", sans-serif',
     textFontSize: "13px",
     textReputationFontWeight: "bold",
   },
 };
 
-interface _ThemesMap {
-  [key: string]: any;
+export class Theme {
+  readonly bgColor!: string;
+  readonly borderMainColor!: string;
+  readonly displayNameColor!: string;
+  readonly reputationColor!: string;
+  readonly badgeCountsColor!: string;
+
+  setCanvasBordersStyle(_width: number, _height: number): string {
+    return `
+    stroke: ${this.borderMainColor};
+    `;
+  }
+
+  drawMaybeExtraBorderLines(_width: number, _height: number): string {
+    return "";
+  }
+
+  drawMaybeProfileImageBackground(_x: number, _y: number, _imgSquareSideSize: number): string {
+    return "";
+  }
+
+  drawMaybeSiteLogoBackground(_logoSquareSideSize: number): string {
+    return "";
+  }
 }
 
+interface _ThemesMap {
+  [key: string]: Theme;
+}
+
+new class Something extends Theme {
+  bgColor = "#222222";
+  borderMainColor = "#888888";
+  borderRightAndBottomColor = "#444444";
+  displayNameColor = "#CCCCCC";
+  reputationColor = "#CCCCCC";
+  badgeCountsColor = "#CCCCCC";
+
+  setCanvasBordersStyle(this: Theme, width: number, height: number): string {
+    return `
+      stroke: ${this.borderMainColor};
+      stroke-dasharray: ${width} ${height} ${0} ${width};
+      `;
+  }
+
+  drawMaybeExtraBorderLines(this: Something, width: number, height: number): string {
+    return `
+      <line x1="${width}" y1="0" x2="${width}" y2="${height}" stroke="${this.borderRightAndBottomColor}" />
+      <line x1="0" y1="${height}" x2="${width}" y2="${height}" stroke="${this.borderRightAndBottomColor}" />
+      `;
+  }
+}();
+
 export const THEMES: _ThemesMap = {
-  "classic_flair_default": {
-    bgColor: "#EEEEEE",
-    borderColor: "#CCCCCC",
-    displayNameColor: "#0077CC",
-    reputationColor: "#444444",
-    badgeCountsColor: "#808185",
-
-    setCanvasBordersStyle: function (_width: number, _height: number): string {
-      return `
-      stroke: ${this.borderColor};
-      `
-    },
-
-    drawMaybeExtraBorderLines: function (_width: number, _height: number): string {
-      return "";
-    }
-  },
+  "classic_flair_default": new class ClassicFlairDefault extends Theme {
+    bgColor = "#EEEEEE";
+    borderMainColor = "#CCCCCC";
+    displayNameColor = "#0077CC";
+    reputationColor = "#444444";
+    badgeCountsColor = "#808185";
+  }(),
 
   //classic_flair_clean
-  "clean": {
-    bgColor: "#FFFFFF",
-    // borderColor: "none",
-    displayNameColor: "#0077CC",
-    reputationColor: "#444444",
-    badgeCountsColor: "#808185",
+  "clean": new class Clean extends Theme {
+    bgColor = "#FFFFFF";
+    borderMainColor = "none";
+    displayNameColor = "#0077CC";
+    reputationColor = "#444444";
+    badgeCountsColor = "#808185";
 
-    setCanvasBordersStyle: function (_width: number, _height: number): string {
+    setCanvasBordersStyle(_width: number, _height: number): string {
       //no need to draw any border, since the border is "none", or rather, the color is the same as the background's
-      // return `
-      // stroke: ${this.borderColor}
-      // `
-      return "";
-    },
-
-    drawMaybeExtraBorderLines: function (_width: number, _height: number): string {
       return "";
     }
-  },
+  }(),
 
   //classic_flair_dark
-  "dark": {
-    bgColor: "#222222",
-    //wrong; it has 2 border colors
-    borderColor: "#888888",
-    rightAndBottomBorderColor: "#444444",
-    displayNameColor: "#CCCCCC",
-    reputationColor: "#CCCCCC",
-    badgeCountsColor: "#CCCCCC",
+  "dark": new class Dark extends Theme {
+    bgColor = "#222222";
+    borderMainColor = "#888888";
+    borderRightAndBottomColor = "#444444";
+    displayNameColor = "#CCCCCC";
+    reputationColor = "#CCCCCC";
+    badgeCountsColor = "#CCCCCC";
 
-    setCanvasBordersStyle: function (width: number, height: number): string {
+    setCanvasBordersStyle(this: Theme, width: number, height: number): string {
       return `
-      stroke: ${this.borderColor};
+      stroke: ${this.borderMainColor};
       stroke-dasharray: ${width} ${height} ${0} ${width};
-      `
-    },
-
-    drawMaybeExtraBorderLines: function (width: number, height: number): string {
-      return `
-      <line x1="${width}" y1="0" x2="${width}" y2="${height}" stroke="${this.rightAndBottomBorderColor}" />
-      <line x1="0" y1="${height}" x2="${width}" y2="${height}" stroke="${this.rightAndBottomBorderColor}" />
-      `
+      `;
     }
-  },
+
+    drawMaybeExtraBorderLines(this: Dark, width: number, height: number): string {
+      return `
+      <line x1="${width}" y1="0" x2="${width}" y2="${height}" stroke="${this.borderRightAndBottomColor}" />
+      <line x1="0" y1="${height}" x2="${width}" y2="${height}" stroke="${this.borderRightAndBottomColor}" />
+      `;
+    }
+  }(),
 
   //classic_flair_hotdog
-  "hotdog": {
-    bgColor: "#FF0100",
-    //wrong; it has 2 border colors
-    borderColor: "#000000",
-    displayNameColor: "#FFFF00",
-    reputationColor: "#FFFF00",
-    badgeCountsColor: "#FFFFFF",
+  "hotdog": new class Hotdog extends Theme {
+    bgColor = "#FF0100";
+    borderMainColor = "#000000";
+    displayNameColor = "#FFFF00";
+    reputationColor = this.displayNameColor;
+    badgeCountsColor = "#FFFFFF";
 
-    setCanvasBordersStyle: function (width: number, height: number): string {
+    setCanvasBordersStyle(this: Theme, width: number, height: number): string {
       return `
-      stroke: ${this.borderColor};
+      stroke: ${this.borderMainColor};
       stroke-dasharray: 0 ${width} ${height + width} ${height};
-      `
-    },
-
-    drawMaybeExtraBorderLines: function (_width: number, _height: number): string {
-      return "";
+      `;
     }
-  },
-};
 
+    drawMaybeProfileImageBackground(x: number, y: number, imgSquareSideSize: number): string {
+      return `<rect x="${x - 1}" y="${y - 1}" width="${imgSquareSideSize + 2}" height="${
+        imgSquareSideSize + 2
+      }" fill="${this.displayNameColor}"/>`;
+    }
+
+    drawMaybeSiteLogoBackground(logoSquareSideSize: number): string {
+      return `<rect x="1" y = "1" width = "${logoSquareSideSize-2}" height = "${logoSquareSideSize-2}" fill = "yellow" />`;
+    }
+  }(),
+};

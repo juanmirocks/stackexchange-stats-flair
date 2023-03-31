@@ -2,15 +2,21 @@
 import { ReqParams } from "./dataTypes.ts";
 import { fetchImageAsBase64DataURL } from "./fetch.ts";
 import SE_ART from "./svg.ts";
-import { DEFAULT_STYLES, THEMES } from "./themes.ts";
+import { DEFAULT_STYLES, THEMES, Theme } from "./themes.ts";
 
 
 const LOCALE = "en";
 
 
-function writeSiteLogoIfAvailable(params: ReqParams): string {
+function drawSiteLogoIfAvailable(params: ReqParams, theme: Theme): string {
+  //Note: the "18" logo size value is hardcoded for stackoverflow's
   return (SE_ART[params.site])
-    ? `<svg id="svgSeIconParent" x="60" y="38">${SE_ART[params.site].LogoGlyphXxs}</svg>`
+    ? `
+    <svg id="svgSeIconParent" x="60" y="38" fill="black">
+      ${theme.drawMaybeSiteLogoBackground(18)}
+      ${SE_ART[params.site].LogoGlyphXxs}
+    </svg>
+    `
     : "";
 }
 
@@ -23,7 +29,7 @@ function formatNum(x: number): string {
 }
 
 
-function writeBadge(badgeCount: number, color: string): string {
+function drawBadge(badgeCount: number, color: string): string {
   return (badgeCount > 0)
     ? `<tspan><tspan fill="${color}">●</tspan><tspan>${formatNum(badgeCount)}</tspan></tspan>`
     : "";
@@ -115,18 +121,20 @@ export function drawClassicFlair(params: ReqParams, seUserPayload: any): Promise
       />
       ${theme.drawMaybeExtraBorderLines(width, height)}
 
+      ${/* the values (x,y,size) must be equal in both lines */""}
+      ${theme.drawMaybeProfileImageBackground(4, 4, 50)}
       <image href="${profileImageBase64Url}" x="4" y="4" height="50" width="50" />
 
       <g>
-        ${writeSiteLogoIfAvailable(params)}
+        ${drawSiteLogoIfAvailable(params, theme)}
         <text id="display_name" text-anchor="end" x="${width - 6}" y="18" fill="${theme.displayNameColor}">${user.display_name}</text>
       </g>
 
       <text class="reputation" text-anchor="end" x="${width - 6}" y="35" fill="${theme.reputationColor}">${formatNum(user.reputation)}</text>
       <text text-anchor="end" x="${width - 6}" y="52" fill="${theme.badgeCountsColor}">
-        ${writeBadge(user.badge_counts.gold, DEFAULT_STYLES.goldColor)}
-        ${writeBadge(user.badge_counts.silver, DEFAULT_STYLES.silverColor)}
-        ${writeBadge(user.badge_counts.bronze, DEFAULT_STYLES.bronzeColor)}
+        ${drawBadge(user.badge_counts.gold, DEFAULT_STYLES.goldColor)}
+        ${drawBadge(user.badge_counts.silver, DEFAULT_STYLES.silverColor)}
+        ${drawBadge(user.badge_counts.bronze, DEFAULT_STYLES.bronzeColor)}
       </text>
     </svg>`;
   });
