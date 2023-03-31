@@ -19,14 +19,14 @@ interface _ThemesMap {
 export const THEMES: _ThemesMap = {
   "classic_flair_default": {
     bgColor: "#EEEEEE",
-    borderColor: "#CCCCCC",
+    borderMainColor: "#CCCCCC",
     displayNameColor: "#0077CC",
     reputationColor: "#444444",
     badgeCountsColor: "#808185",
 
     setCanvasBordersStyle: function (_width: number, _height: number): string {
       return `
-      stroke: ${this.borderColor};
+      stroke: ${this.borderMainColor};
       `
     },
 
@@ -38,7 +38,7 @@ export const THEMES: _ThemesMap = {
   //classic_flair_clean
   "clean": {
     bgColor: "#FFFFFF",
-    // borderColor: "none",
+    // borderMainColor: "none",
     displayNameColor: "#0077CC",
     reputationColor: "#444444",
     badgeCountsColor: "#808185",
@@ -46,7 +46,7 @@ export const THEMES: _ThemesMap = {
     setCanvasBordersStyle: function (_width: number, _height: number): string {
       //no need to draw any border, since the border is "none", or rather, the color is the same as the background's
       // return `
-      // stroke: ${this.borderColor}
+      // stroke: ${this.borderMainColor}
       // `
       return "";
     },
@@ -60,23 +60,23 @@ export const THEMES: _ThemesMap = {
   "dark": {
     bgColor: "#222222",
     //wrong; it has 2 border colors
-    borderColor: "#888888",
-    rightAndBottomBorderColor: "#444444",
+    borderMainColor: "#888888",
+    borderRightAndBottomColor: "#444444",
     displayNameColor: "#CCCCCC",
     reputationColor: "#CCCCCC",
     badgeCountsColor: "#CCCCCC",
 
     setCanvasBordersStyle: function (width: number, height: number): string {
       return `
-      stroke: ${this.borderColor};
+      stroke: ${this.borderMainColor};
       stroke-dasharray: ${width} ${height} ${0} ${width};
       `
     },
 
     drawMaybeExtraBorderLines: function (width: number, height: number): string {
       return `
-      <line x1="${width}" y1="0" x2="${width}" y2="${height}" stroke="${this.rightAndBottomBorderColor}" />
-      <line x1="0" y1="${height}" x2="${width}" y2="${height}" stroke="${this.rightAndBottomBorderColor}" />
+      <line x1="${width}" y1="0" x2="${width}" y2="${height}" stroke="${this.borderRightAndBottomColor}" />
+      <line x1="0" y1="${height}" x2="${width}" y2="${height}" stroke="${this.borderRightAndBottomColor}" />
       `
     }
   },
@@ -85,14 +85,14 @@ export const THEMES: _ThemesMap = {
   "hotdog": {
     bgColor: "#FF0100",
     //wrong; it has 2 border colors
-    borderColor: "#000000",
+    borderMainColor: "#000000",
     displayNameColor: "#FFFF00",
     reputationColor: "#FFFF00",
     badgeCountsColor: "#FFFFFF",
 
     setCanvasBordersStyle: function (width: number, height: number): string {
       return `
-      stroke: ${this.borderColor};
+      stroke: ${this.borderMainColor};
       stroke-dasharray: 0 ${width} ${height + width} ${height};
       `
     },
