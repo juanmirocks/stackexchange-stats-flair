@@ -28,6 +28,10 @@ class Theme {
   drawMaybeExtraBorderLines(_width: number, _height: number): string {
     return "";
   }
+
+  drawMaybeProfileImageBackground(_x: number, _y: number, _imgSquareSideSize: number) {
+    return "";
+  }
 }
 
 
@@ -116,7 +120,7 @@ export const THEMES: _ThemesMap = {
     bgColor = "#FF0100";
     borderMainColor = "#000000";
     displayNameColor = "#FFFF00";
-    reputationColor = "#FFFF00";
+    reputationColor = this.displayNameColor;
     badgeCountsColor = "#FFFFFF";
 
     setCanvasBordersStyle = function (this: Theme, width: number, height: number): string {
@@ -125,5 +129,9 @@ export const THEMES: _ThemesMap = {
       stroke-dasharray: 0 ${width} ${height + width} ${height};
       `;
     };
+
+    drawMaybeProfileImageBackground(x: number, y: number, imgSquareSideSize: number) {
+      return `<rect x="${x-1}" y="${y-1}" width="${imgSquareSideSize+2}" height="${imgSquareSideSize+2}" fill="${this.displayNameColor}"/>`;
+    }
   }(),
 };

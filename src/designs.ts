@@ -115,6 +115,8 @@ export function drawClassicFlair(params: ReqParams, seUserPayload: any): Promise
       />
       ${theme.drawMaybeExtraBorderLines(width, height)}
 
+      ${/* the values (x,y,size) must be equal in both lines */""}
+      ${theme.drawMaybeProfileImageBackground(4, 4, 50)}
       <image href="${profileImageBase64Url}" x="4" y="4" height="50" width="50" />
 
       <g>
