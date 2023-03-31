@@ -2,15 +2,21 @@
 import { ReqParams } from "./dataTypes.ts";
 import { fetchImageAsBase64DataURL } from "./fetch.ts";
 import SE_ART from "./svg.ts";
-import { DEFAULT_STYLES, THEMES } from "./themes.ts";
+import { DEFAULT_STYLES, THEMES, Theme } from "./themes.ts";
 
 
 const LOCALE = "en";
 
 
-function drawSiteLogoIfAvailable(params: ReqParams): string {
+function drawSiteLogoIfAvailable(params: ReqParams, theme: Theme): string {
+  //Note: the "18" logo size value is hardcoded for stackoverflow's
   return (SE_ART[params.site])
-    ? `<svg id="svgSeIconParent" x="60" y="38">${SE_ART[params.site].LogoGlyphXxs}</svg>`
+    ? `
+    <svg id="svgSeIconParent" x="60" y="38" fill="black">
+      ${theme.drawMaybeSiteLogoBackground(18)}
+      ${SE_ART[params.site].LogoGlyphXxs}
+    </svg>
+    `
     : "";
 }
 
@@ -120,7 +126,7 @@ export function drawClassicFlair(params: ReqParams, seUserPayload: any): Promise
       <image href="${profileImageBase64Url}" x="4" y="4" height="50" width="50" />
 
       <g>
-        ${drawSiteLogoIfAvailable(params)}
+        ${drawSiteLogoIfAvailable(params, theme)}
         <text id="display_name" text-anchor="end" x="${width - 6}" y="18" fill="${theme.displayNameColor}">${user.display_name}</text>
       </g>
 

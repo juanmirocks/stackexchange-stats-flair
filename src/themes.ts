@@ -11,7 +11,7 @@ export const DEFAULT_STYLES = {
   },
 };
 
-class Theme {
+export class Theme {
   readonly bgColor!: string;
   readonly borderMainColor!: string;
   readonly displayNameColor!: string;
@@ -28,7 +28,11 @@ class Theme {
     return "";
   }
 
-  drawMaybeProfileImageBackground(_x: number, _y: number, _imgSquareSideSize: number) {
+  drawMaybeProfileImageBackground(_x: number, _y: number, _imgSquareSideSize: number): string {
+    return "";
+  }
+
+  drawMaybeSiteLogoBackground(_logoSquareSideSize: number): string {
     return "";
   }
 }
@@ -122,10 +126,14 @@ export const THEMES: _ThemesMap = {
       `;
     }
 
-    drawMaybeProfileImageBackground(x: number, y: number, imgSquareSideSize: number) {
+    drawMaybeProfileImageBackground(x: number, y: number, imgSquareSideSize: number): string {
       return `<rect x="${x - 1}" y="${y - 1}" width="${imgSquareSideSize + 2}" height="${
         imgSquareSideSize + 2
       }" fill="${this.displayNameColor}"/>`;
+    }
+
+    drawMaybeSiteLogoBackground(logoSquareSideSize: number): string {
+      return `<rect x="1" y = "1" width = "${logoSquareSideSize-2}" height = "${logoSquareSideSize-2}" fill = "yellow" />`;
     }
   }(),
 };
