@@ -13,7 +13,7 @@ export const THEMES: _ThemesMap = {
   "classic-flair-default": {
     bgColor: "#EBEBEB",
     borderColor: "#C5C5C5",
-    displayNameColor: "#2A6AC4",
+    displayNameColor: "#0077CC",
     reputationColor: "#3C3C3C",
     badgeCountsColor: "#75767A",
     textFontFamily: DEFAULT_STYLES.textFontFamily,
