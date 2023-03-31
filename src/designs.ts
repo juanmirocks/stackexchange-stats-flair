@@ -2,6 +2,7 @@
 import { ReqParams } from "./dataTypes.ts";
 import { fetchImageAsBase64DataURL } from "./fetch.ts";
 import SE_ART from "./svg.ts";
+import { DEFAULT_STYLES, THEMES } from "./themes.ts";
 
 
 const LOCALE = "en";
@@ -63,8 +64,7 @@ export function drawClassicFlair(params: ReqParams, seUserPayload: any): Promise
     const width = 208;
     const height = 58;
 
-    const bgColor = "rgb(234,234,234)";
-    const borderColor = "rgb(194,194,194)";
+    const theme = THEMES[params.theme];
 
     return `
     <svg
@@ -95,34 +95,38 @@ export function drawClassicFlair(params: ReqParams, seUserPayload: any): Promise
 
       <style>
         text {
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Adjusted", "Segoe UI", "Liberation Sans", sans-serif;
-          font-size: 13px;
+          font-family: ${DEFAULT_STYLES["classic-flair"].textFontFamily};
+          font-size: ${DEFAULT_STYLES["classic-flair"].textFontSize};
         }
 
         text.reputation {
-          font-weight: bold;
+          font-weight: ${DEFAULT_STYLES["classic-flair"].textReputationFontWeight};
+        }
+
+        rect.canvas {
+          ${theme.setCanvasBordersStyle(width, height)}
         }
       </style>
 
-      <rect
+      <rect class="canvas"
         width="100%"
         height="100%"
-        fill="${bgColor}"
-        stroke="${borderColor}"
+        fill="${theme.bgColor}"
       />
+      ${theme.drawMaybeExtraBorderLines(width, height)}
 
       <image href="${profileImageBase64Url}" x="4" y="4" height="50" width="50" />
 
       <g>
         ${writeSiteLogoIfAvailable(params)}
-        <text id="display_name" text-anchor="end" x="${width - 6}" y="18" fill="rgb(0,116,204)">${user.display_name}</text>
+        <text id="display_name" text-anchor="end" x="${width - 6}" y="18" fill="${theme.displayNameColor}">${user.display_name}</text>
       </g>
 
-      <text class="reputation" text-anchor="end" x="${width - 6}" y="35" fill="rgb(22,22,22)">${formatNum(user.reputation)}</text>
-      <text text-anchor="end" x="${width - 6}" y="52" fill="rgb(121,122,127)">
-        ${writeBadge(user.badge_counts.gold, "gold")}
-        ${writeBadge(user.badge_counts.silver, "silver")}
-        ${writeBadge(user.badge_counts.bronze, "rgb(207,143,92)")}
+      <text class="reputation" text-anchor="end" x="${width - 6}" y="35" fill="${theme.reputationColor}">${formatNum(user.reputation)}</text>
+      <text text-anchor="end" x="${width - 6}" y="52" fill="${theme.badgeCountsColor}">
+        ${writeBadge(user.badge_counts.gold, DEFAULT_STYLES.goldColor)}
+        ${writeBadge(user.badge_counts.silver, DEFAULT_STYLES.silverColor)}
+        ${writeBadge(user.badge_counts.bronze, DEFAULT_STYLES.bronzeColor)}
       </text>
     </svg>`;
   });
