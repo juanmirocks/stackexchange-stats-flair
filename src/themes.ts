@@ -17,7 +17,7 @@ interface _ThemesMap {
 }
 
 export const THEMES: _ThemesMap = {
-  "classic-flair-default": {
+  "classic_flair_default": {
     bgColor: "#EEEEEE",
     borderColor: "#CCCCCC",
     displayNameColor: "#0077CC",
@@ -35,7 +35,7 @@ export const THEMES: _ThemesMap = {
     }
   },
 
-  //classic-flair-clean
+  //classic_flair_clean
   "clean": {
     bgColor: "#FFFFFF",
     // borderColor: "none",
@@ -56,7 +56,7 @@ export const THEMES: _ThemesMap = {
     }
   },
 
-  //classic-flair-dark
+  //classic_flair_dark
   "dark": {
     bgColor: "#222222",
     //wrong; it has 2 border colors
@@ -81,7 +81,7 @@ export const THEMES: _ThemesMap = {
     }
   },
 
-  //classic-flair-hotdog
+  //classic_flair_hotdog
   "hotdog": {
     bgColor: "#FF0100",
     //wrong; it has 2 border colors

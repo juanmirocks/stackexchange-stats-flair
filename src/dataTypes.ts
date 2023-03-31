@@ -40,7 +40,7 @@ export function parseReqParams(reqUrl: URL): ReqParams {
   const theme = getTransformCheck(searchParams, "theme",
     val => val,
     val => require((Object.hasOwn(THEMES, val)), `Given 'theme' (${val}) is not recognized; available themes: ${Object.keys(THEMES)}`),
-    "classic-flair-default"
+    "classic_flair_default"
   ) as string;
 
   return {
