@@ -1,3 +1,4 @@
+import { THEMES } from "./themes.ts";
 import { require } from "./utils.ts";
 
 /**
@@ -7,7 +8,8 @@ import { require } from "./utils.ts";
  */
 export interface ReqParams {
   user_id: number,
-  site: string
+  site: string,
+  theme: string
 }
 
 export function parseReqParams(reqUrl: URL): ReqParams {
@@ -17,9 +19,19 @@ export function parseReqParams(reqUrl: URL): ReqParams {
   const user_id = Number(searchParams.get("user_id"));
   require(user_id, `'user_id' query parameter is mandatory and must be a number; given params: ${searchParams}`);
 
+  //Own Parameters
+  let theme = searchParams.get("theme");
+  if (theme) {
+    require((Object.hasOwn(THEMES, theme)), `Given 'theme' (${theme}) is not recognized; available themes: ${Object.keys(THEMES)}`)
+  }
+  else {
+    theme = "classic-flair-default"
+  }
+
   return {
     user_id: user_id,
     site: searchParams.get("site") || "stackoverflow",
+    theme: theme
   };
 }
 
