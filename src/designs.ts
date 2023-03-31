@@ -95,12 +95,12 @@ export function drawClassicFlair(params: ReqParams, seUserPayload: any): Promise
 
       <style>
         text {
-          font-family: ${theme.textFontFamily};
-          font-size: ${theme.textFontSize};
+          font-family: ${DEFAULT_STYLES["classic-flair"].textFontFamily};
+          font-size: ${DEFAULT_STYLES["classic-flair"].textFontSize};
         }
 
         text.reputation {
-          font-weight: ${theme.textReputationFontWeight};
+          font-weight: ${DEFAULT_STYLES["classic-flair"].textReputationFontWeight};
         }
       </style>
 

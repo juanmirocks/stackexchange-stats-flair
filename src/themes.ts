@@ -3,10 +3,13 @@ export const DEFAULT_STYLES = {
   "silverColor": "silver",
   // This is a brighter color. Classic flair uses #CC9966, SO (2023-04) uses #D1A684
   "bronzeColor": "#CF8F5C",
-  textFontFamily:
-    '-apple-system, BlinkMacSystemFont, "Segoe UI Adjusted", "Segoe UI", "Liberation Sans", sans-serif',
-  textFontSize: "13px",
-  textReputationFontWeight: "bold",
+
+  "classic-flair": {
+    textFontFamily:
+      '-apple-system, BlinkMacSystemFont, "Segoe UI Adjusted", "Segoe UI", "Liberation Sans", sans-serif',
+    textFontSize: "13px",
+    textReputationFontWeight: "bold",
+  }
 };
 
 
@@ -21,10 +24,8 @@ export const THEMES: _ThemesMap = {
     borderColor: "#CCCCCC",
     displayNameColor: "#0077CC",
     reputationColor: "#444444",
-    badgeCountsColor: "#808185",
-    textFontFamily: DEFAULT_STYLES.textFontFamily,
-    textFontSize: DEFAULT_STYLES.textFontSize,
-    textReputationFontWeight: DEFAULT_STYLES.textReputationFontWeight
+    badgeCountsColor: "#808185"
+  },
   },
 };
 
