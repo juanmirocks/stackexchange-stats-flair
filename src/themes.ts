@@ -11,6 +11,7 @@ export const DEFAULT_STYLES = {
   },
 };
 
+
 class Theme {
   readonly bgColor!: string;
   readonly borderMainColor!: string;
