@@ -102,13 +102,17 @@ export function drawClassicFlair(params: ReqParams, seUserPayload: any): Promise
         text.reputation {
           font-weight: ${DEFAULT_STYLES["classic-flair"].textReputationFontWeight};
         }
+
+        rect.canvas {
+          stroke: ${theme.borderColor};
+          stroke-dasharray: 0 ${width} ${height + width};
+        }
       </style>
 
-      <rect
+      <rect class="canvas"
         width="100%"
         height="100%"
         fill="${theme.bgColor}"
-        stroke="${theme.borderColor}"
       />
 
       <image href="${profileImageBase64Url}" x="4" y="4" height="50" width="50" />
