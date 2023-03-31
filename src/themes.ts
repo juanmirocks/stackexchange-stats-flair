@@ -25,6 +25,15 @@ export const THEMES: _ThemesMap = {
     badgeCountsColor: "#808185",
   },
 
+  //classic-flair-clean
+  "clean": {
+    bgColor: "#FFFFFF",
+    borderColor: "#FFFFFF",
+    displayNameColor: "#0077CC",
+    reputationColor: "#444444",
+    badgeCountsColor: "#808185",
+  },
+
   //classic-flair-dark
   "dark": {
     bgColor: "#222222",
@@ -46,7 +55,3 @@ export const THEMES: _ThemesMap = {
   },
 };
 
-//classic-flair-clean
-THEMES["clean"] = structuredClone(THEMES["classic-flair-default"])
-THEMES["clean"].bgColor = "#FFFFFF"
-THEMES["clean"].borderColor = "#FFFFFF"
