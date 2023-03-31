@@ -9,25 +9,25 @@ export const DEFAULT_STYLES = {
   textReputationFontWeight: "bold",
 };
 
+
+interface _ThemesMap {
+  [key: string]: any;
+}
+
+
 export const THEMES: _ThemesMap = {
   "classic-flair-default": {
-    bgColor: "#EBEBEB",
-    borderColor: "#C5C5C5",
+    bgColor: "#EEEEEE",
+    borderColor: "#CCCCCC",
     displayNameColor: "#0077CC",
-    reputationColor: "#3C3C3C",
-    badgeCountsColor: "#75767A",
-    textFontFamily: DEFAULT_STYLES.textFontFamily,
-    textFontSize: DEFAULT_STYLES.textFontSize,
-    textReputationFontWeight: DEFAULT_STYLES.textReputationFontWeight
-  },
-    reputationColor: "rgb(22,22,22)",
-    badgeCountsColor: "rgb(121,122,127)",
+    reputationColor: "#444444",
+    badgeCountsColor: "#808185",
     textFontFamily: DEFAULT_STYLES.textFontFamily,
     textFontSize: DEFAULT_STYLES.textFontSize,
     textReputationFontWeight: DEFAULT_STYLES.textReputationFontWeight
   },
 };
 
-interface _ThemesMap {
-  [key: string]: any;
-}
+THEMES["clean"] = structuredClone(THEMES["classic-flair-default"])
+THEMES["clean"].bgColor = "#FFFFFF"
+THEMES["clean"].borderColor = "#FFFFFF"
