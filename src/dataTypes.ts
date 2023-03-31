@@ -12,11 +12,13 @@ export interface ReqParams {
 
 export function parseReqParams(reqUrl: URL): ReqParams {
   const searchParams = reqUrl.searchParams;
-  const user_id = Number(reqUrl.searchParams.get("user_id"));
+
+  //Stack Exchange Parameters
+  const user_id = Number(searchParams.get("user_id"));
   require(user_id, `'user_id' query parameter is mandatory and must be a number; given params: ${searchParams}`);
 
   return {
-    user_id: Number(user_id),
+    user_id: user_id,
     site: searchParams.get("site") || "stackoverflow",
   };
 }
