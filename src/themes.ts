@@ -11,7 +11,6 @@ export const DEFAULT_STYLES = {
   },
 };
 
-
 class Theme {
   readonly bgColor!: string;
   readonly borderMainColor!: string;
@@ -34,11 +33,9 @@ class Theme {
   }
 }
 
-
 interface _ThemesMap {
   [key: string]: Theme;
 }
-
 
 new class Something extends Theme {
   bgColor = "#222222";
@@ -48,25 +45,20 @@ new class Something extends Theme {
   reputationColor = "#CCCCCC";
   badgeCountsColor = "#CCCCCC";
 
-  setCanvasBordersStyle = function (this: Theme, width: number, height: number): string {
+  setCanvasBordersStyle(this: Theme, width: number, height: number): string {
     return `
       stroke: ${this.borderMainColor};
       stroke-dasharray: ${width} ${height} ${0} ${width};
       `;
-  };
+  }
 
-  drawMaybeExtraBorderLines = function (
-    this: Something,
-    width: number,
-    height: number,
-  ): string {
+  drawMaybeExtraBorderLines(this: Something, width: number, height: number): string {
     return `
       <line x1="${width}" y1="0" x2="${width}" y2="${height}" stroke="${this.borderRightAndBottomColor}" />
       <line x1="0" y1="${height}" x2="${width}" y2="${height}" stroke="${this.borderRightAndBottomColor}" />
       `;
-  };
+  }
 }();
-
 
 export const THEMES: _ThemesMap = {
   "classic_flair_default": new class ClassicFlairDefault extends Theme {
@@ -85,10 +77,10 @@ export const THEMES: _ThemesMap = {
     reputationColor = "#444444";
     badgeCountsColor = "#808185";
 
-    setCanvasBordersStyle = function (_width: number, _height: number): string {
+    setCanvasBordersStyle(_width: number, _height: number): string {
       //no need to draw any border, since the border is "none", or rather, the color is the same as the background's
       return "";
-    };
+    }
   }(),
 
   //classic_flair_dark
@@ -100,19 +92,19 @@ export const THEMES: _ThemesMap = {
     reputationColor = "#CCCCCC";
     badgeCountsColor = "#CCCCCC";
 
-    setCanvasBordersStyle = function (this: Theme, width: number, height: number): string {
+    setCanvasBordersStyle(this: Theme, width: number, height: number): string {
       return `
       stroke: ${this.borderMainColor};
       stroke-dasharray: ${width} ${height} ${0} ${width};
       `;
-    };
+    }
 
-    drawMaybeExtraBorderLines = function (this: Dark, width: number, height: number): string {
+    drawMaybeExtraBorderLines(this: Dark, width: number, height: number): string {
       return `
       <line x1="${width}" y1="0" x2="${width}" y2="${height}" stroke="${this.borderRightAndBottomColor}" />
       <line x1="0" y1="${height}" x2="${width}" y2="${height}" stroke="${this.borderRightAndBottomColor}" />
       `;
-    };
+    }
   }(),
 
   //classic_flair_hotdog
@@ -123,15 +115,17 @@ export const THEMES: _ThemesMap = {
     reputationColor = this.displayNameColor;
     badgeCountsColor = "#FFFFFF";
 
-    setCanvasBordersStyle = function (this: Theme, width: number, height: number): string {
+    setCanvasBordersStyle(this: Theme, width: number, height: number): string {
       return `
       stroke: ${this.borderMainColor};
       stroke-dasharray: 0 ${width} ${height + width} ${height};
       `;
-    };
+    }
 
     drawMaybeProfileImageBackground(x: number, y: number, imgSquareSideSize: number) {
-      return `<rect x="${x-1}" y="${y-1}" width="${imgSquareSideSize+2}" height="${imgSquareSideSize+2}" fill="${this.displayNameColor}"/>`;
+      return `<rect x="${x - 1}" y="${y - 1}" width="${imgSquareSideSize + 2}" height="${
+        imgSquareSideSize + 2
+      }" fill="${this.displayNameColor}"/>`;
     }
   }(),
 };
