@@ -12,21 +12,36 @@ export interface ReqParams {
   theme: string
 }
 
+
+function getTransformCheck(searchParams: URLSearchParams, key: string, transform: (value: string | null) => any, check: (value: any) => void, defValue: any = null): any {
+  const valStr = searchParams.get(key);
+
+  if (valStr === null && defValue !== null) {
+    return defValue;
+  }
+  else {
+    const val = transform(valStr);
+    check(val);
+    return val;
+  }
+}
+
+
 export function parseReqParams(reqUrl: URL): ReqParams {
   const searchParams = reqUrl.searchParams;
 
   //Stack Exchange Parameters
-  const user_id = Number(searchParams.get("user_id"));
-  require(user_id, `'user_id' query parameter is mandatory and must be a number; given params: ${searchParams}`);
+  const user_id = getTransformCheck(searchParams, "user_id",
+    val => Number(val),
+    val => require(val, `'user_id' query parameter is mandatory and must be a number; given params: ${searchParams}`)
+  ) as number;
 
   //Own Parameters
-  let theme = searchParams.get("theme");
-  if (theme) {
-    require((Object.hasOwn(THEMES, theme)), `Given 'theme' (${theme}) is not recognized; available themes: ${Object.keys(THEMES)}`)
-  }
-  else {
-    theme = "classic-flair-default"
-  }
+  const theme = getTransformCheck(searchParams, "theme",
+    val => val,
+    val => require((Object.hasOwn(THEMES, val)), `Given 'theme' (${val}) is not recognized; available themes: ${Object.keys(THEMES)}`),
+    "classic-flair-default"
+  ) as string;
 
   return {
     user_id: user_id,
