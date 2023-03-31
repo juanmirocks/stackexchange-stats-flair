@@ -9,14 +9,12 @@ export const DEFAULT_STYLES = {
       '-apple-system, BlinkMacSystemFont, "Segoe UI Adjusted", "Segoe UI", "Liberation Sans", sans-serif',
     textFontSize: "13px",
     textReputationFontWeight: "bold",
-  }
+  },
 };
-
 
 interface _ThemesMap {
   [key: string]: any;
 }
-
 
 export const THEMES: _ThemesMap = {
   "classic-flair-default": {
@@ -24,16 +22,27 @@ export const THEMES: _ThemesMap = {
     borderColor: "#CCCCCC",
     displayNameColor: "#0077CC",
     reputationColor: "#444444",
-    badgeCountsColor: "#808185"
+    badgeCountsColor: "#808185",
   },
 
   //classic-flair-dark
   "dark": {
     bgColor: "#222222",
+    //wrong; it has 2 border colors
     borderColor: "#888888",
     displayNameColor: "#CCCCCC",
     reputationColor: "#CCCCCC",
-    badgeCountsColor: "#CCCCCC"
+    badgeCountsColor: "#CCCCCC",
+  },
+
+  //classic-flair-hotdog
+  "hotdog": {
+    bgColor: "#FF0100",
+    //wrong; it has 2 border colors
+    borderColor: "#000000",
+    displayNameColor: "#FFFF00",
+    reputationColor: "#FFFF00",
+    badgeCountsColor: "#FFFFFF",
   },
 };
 
