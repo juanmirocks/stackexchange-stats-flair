@@ -45,6 +45,7 @@ interface _ThemesMap {
 
 
 export const THEMES: _ThemesMap = {
+  //default
   "classic_flair_default": new class ClassicFlairDefault extends Theme {
     bgColor = "#EEEEEE";
     borderMainColor = "#CCCCCC";
