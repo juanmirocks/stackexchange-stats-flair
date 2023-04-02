@@ -39,7 +39,7 @@ URL query parameters:
 <details>
 <summary>See available</summary>
 
-### Design: classic-flair
+### Design: classic_flair
 
 | Theme name                        | Result                                                                                                                       |
 | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
