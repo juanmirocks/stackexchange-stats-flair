@@ -1,3 +1,8 @@
+![TypeScript](https://img.shields.io/badge/typescript-007ACC.svg?logo=typescript&logoColor=white)
+![Deno](https://img.shields.io/badge/deno-000000?logo=deno&logoColor=white)
+![SVG](https://img.shields.io/badge/SVG-FFB13B?logo=SVG&logoColor=white)
+
+
 ## Modern Stack Exchange flair
 
 Alternative to low-resolution [Stack Exchange flair](http://stackoverflow.com/users/flair/) images, with new, beautiful SVG badges. Example:
