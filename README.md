@@ -26,7 +26,7 @@ alternatively, in HTML:
 
 ```html
 <!-- You might set specific dimensions with the `width`/`height` attributes; https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#height -->
-<img alt="My flair" height="58vw" src="https://stackexchange-stats-flair.juanmi.rocks/test_offline?site=stackoverflow&user_id=YOUR_USER_ID" />
+<img alt="My flair" height="58vw" src="https://stackexchange-stats-flair.juanmi.rocks/?site=stackoverflow&user_id=YOUR_USER_ID" />
 ```
 
 
