@@ -1,3 +1,6 @@
+// Copyright 2023 Dr. Juan Miguel Cejuela
+// SPDX-License-Identifier: Apache-2.0
+
 import { serve } from "https://deno.land/std@0.181.0/http/server.ts";
 import { handleError } from "./utils.ts";
 import * as seAPIs from "./fetch.ts";
