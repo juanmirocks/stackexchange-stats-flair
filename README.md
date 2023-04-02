@@ -30,7 +30,7 @@ URL query parameters:
   Stack Exchange (SE) network;
   [see available sites](https://api.stackexchange.com/docs/sites).
 - `user_id`: your user id in the chosen network (visible for example in your profile's URL).
-- `theme` (Optional) [see below](#designs-themes)
+- `theme` (Optional) [see below](#designs--themes)
 
 ## Designs & Themes
 
