@@ -8,6 +8,7 @@ vs.
 
 ![Example new SO flair](https://stackexchange-stats-flair.juanmi.rocks/test_offline?user_id=1&_cacheHack=2023-04-02)
 
+
 ## How to use
 
 Insert the dynamic image in your markdown, as in:
@@ -30,7 +31,8 @@ URL query parameters:
   Stack Exchange (SE) network;
   [see available sites](https://api.stackexchange.com/docs/sites).
 - `user_id`: your user id in the chosen network (visible for example in your profile's URL).
-- `theme` (Optional) [see below](#designs--themes)
+- `theme` (Optional) [see below](#designs--themes).
+
 
 ## Designs & Themes
 
