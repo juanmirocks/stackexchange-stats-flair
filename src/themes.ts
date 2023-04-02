@@ -11,6 +11,7 @@ export const DEFAULT_STYLES = {
   },
 };
 
+
 export class Theme {
   readonly bgColor!: string;
   readonly borderMainColor!: string;
@@ -37,34 +38,14 @@ export class Theme {
   }
 }
 
+
 interface _ThemesMap {
   [key: string]: Theme;
 }
 
-new class Something extends Theme {
-  bgColor = "#222222";
-  borderMainColor = "#888888";
-  borderRightAndBottomColor = "#444444";
-  displayNameColor = "#CCCCCC";
-  reputationColor = "#CCCCCC";
-  badgeCountsColor = "#CCCCCC";
-
-  setCanvasBordersStyle(this: Theme, width: number, height: number): string {
-    return `
-      stroke: ${this.borderMainColor};
-      stroke-dasharray: ${width} ${height} ${0} ${width};
-      `;
-  }
-
-  drawMaybeExtraBorderLines(this: Something, width: number, height: number): string {
-    return `
-      <line x1="${width}" y1="0" x2="${width}" y2="${height}" stroke="${this.borderRightAndBottomColor}" />
-      <line x1="0" y1="${height}" x2="${width}" y2="${height}" stroke="${this.borderRightAndBottomColor}" />
-      `;
-  }
-}();
 
 export const THEMES: _ThemesMap = {
+  //default
   "classic_flair_default": new class ClassicFlairDefault extends Theme {
     bgColor = "#EEEEEE";
     borderMainColor = "#CCCCCC";

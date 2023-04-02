@@ -13,6 +13,7 @@ const _SE_MY_STACKAPP_KEY_QUERY_PARAM = (_SE_MY_STACKAPP_KEY) ? `&key=${_SE_MY_S
  * @returns async response
  */
 export function fetchSeUserData(params: ReqParams): Promise<any> {
+  //TODO (2023-04-02) retrieve unnecessary data with custom filters: https://api.stackexchange.com/docs/filters
   const targetUrl =
     `https://api.stackexchange.com/2.3/users/${params.user_id}?site=${params.site}${_SE_MY_STACKAPP_KEY_QUERY_PARAM}`;
 

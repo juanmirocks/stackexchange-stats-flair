@@ -19,22 +19,20 @@ vs.
 Insert the dynamic image in your markdown, as in:
 
 ```markdown
-![My flair](https://stackexchange-stats-flair.juanmi.rocks/test_offline?site=stackoverflow&user_id=YOUR_USER_ID)
+![My flair](https://stackexchange-stats-flair.juanmi.rocks/?site=stackoverflow&user_id=YOUR_USER_ID)
 ```
 
 alternatively, in HTML:
 
 ```html
 <!-- You might set specific dimensions with the `width`/`height` attributes; https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#height -->
-<img alt="My flair" height="58vw" src="https://stackexchange-stats-flair.juanmi.rocks/test_offline?site=stackoverflow&user_id=YOUR_USER_ID" />
+<img alt="My flair" height="58vw" src="https://stackexchange-stats-flair.juanmi.rocks/?site=stackoverflow&user_id=YOUR_USER_ID" />
 ```
 
 
 URL query parameters:
 
-- `site` (Optional; defaults to `stackoverflow`) a site's identifier in the
-  Stack Exchange (SE) network;
-  [see available sites](https://api.stackexchange.com/docs/sites).
+- `site` (Optional; defaults to `stackoverflow`) a site's identifier in the Stack Exchange (SE) network; [see list](./test/SE_sites.jsonc).
 - `user_id`: your user id in the chosen network (visible for example in your profile's URL).
 - `theme` (Optional) [see below](#designs--themes).
 
@@ -44,7 +42,7 @@ URL query parameters:
 <details>
 <summary>See available</summary>
 
-### Design: classic-flair
+### Design: classic_flair
 
 | Theme name                        | Result                                                                                                                       |
 | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
