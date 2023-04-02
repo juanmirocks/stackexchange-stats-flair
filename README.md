@@ -32,9 +32,7 @@ alternatively, in HTML:
 
 URL query parameters:
 
-- `site` (Optional; defaults to `stackoverflow`) a site's identifier in the
-  Stack Exchange (SE) network;
-  [see available sites](https://api.stackexchange.com/docs/sites).
+- `site` (Optional; defaults to `stackoverflow`) a site's identifier in the Stack Exchange (SE) network; [see list](./test/SE_sites.jsonc).
 - `user_id`: your user id in the chosen network (visible for example in your profile's URL).
 - `theme` (Optional) [see below](#designs--themes).
 
