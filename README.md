@@ -1,5 +1,4 @@
 Copyright 2023 Dr. Juan Miguel Cejuela
-SPDX-License-Identifier: Apache-2.0
 
 
 # Modern Stack Exchange flair
