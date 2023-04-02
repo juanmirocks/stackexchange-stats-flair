@@ -19,7 +19,7 @@ vs.
 Insert the dynamic image in your markdown, as in:
 
 ```markdown
-![My flair](https://stackexchange-stats-flair.juanmi.rocks/test_offline?site=stackoverflow&user_id=YOUR_USER_ID)
+![My flair](https://stackexchange-stats-flair.juanmi.rocks/?site=stackoverflow&user_id=YOUR_USER_ID)
 ```
 
 alternatively, in HTML:
